@@ -14,11 +14,8 @@ public function show(): void {
 
 
 <?php
-
     $content = ob_get_clean();
-
-    (new \Blog\Views\Layout('Le meilleur blog', $content))->show();
+    (new \Blog\Views\Layout('Yuta', $content))->show();
     }
 }
-
 (new Homepage())->show();

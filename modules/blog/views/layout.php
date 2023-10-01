@@ -6,16 +6,31 @@ class Layout {
 ?>
         <!DOCTYPE html>
         <html>
+
         <head>
-            <meta charset="utf-8"/>
+            <!--    Title   -->
             <title><?= $this->title; ?></title>
-            <link rel="icon" type="image/x-icon" href="../../../../faviicon.ico">
+
+            <!--    Meta   -->
+            <meta charset="UTF-8">
+            <meta name="language" content="EN">
+            <meta name="description" content="Social network based on sharing categorized posts">
+            <meta name="keywords" content="Social media, X killer">
+            <meta name="author" content="BRAHMI Moundir, Brunet Ronan, DITLECADET Michael, ESSALHI Ayoub, LEROUGE Robin, LESTRELIN Valentin">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="refresh" content="30">
+
+            <!--    Link   -->
+            <link rel="icon" type="image/x-icon" href="/favicon.ico">
             <link href="" rel="stylesheet"/>
         </head>
+
         <body>
-            Salut
-        <?= $this->content; ?>
+
+            <?= $this->content; ?>
+
         </body>
+
         </html>
         <?php
     }
