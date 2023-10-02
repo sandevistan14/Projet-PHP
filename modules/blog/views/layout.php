@@ -18,12 +18,14 @@ class Layout {
             <meta name="keywords" content="Social media, X killer">
             <meta name="author" content="BRAHMI Moundir, Brunet Ronan, DITLECADET Michael, ESSALHI Ayoub, LEROUGE Robin, LESTRELIN Valentin">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta http-equiv="refresh" content="30">
 
             <!--    Link   -->
             <link rel="icon" type="image/x-icon" href="/favicon.ico">
+            <link href="/_assets/styles/font.css" rel="stylesheet"/>
             <link href="" rel="stylesheet"/>
         </head>
+
+
 
         <body>
 
