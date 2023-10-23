@@ -1,6 +1,6 @@
 <?php
 
-namespace blog\views;
+namespace modules\blog\views;
 
 require '/home/yuta/www/_assets/includes/autoloader.php';
 
@@ -41,7 +41,7 @@ class Infocookiespage
 
 <?php
         $content = ob_get_clean();
-        (new Layout('Yuta', $content))->show();
+        (new layout('Yuta', $content))->show();
     }
 }
 (new Infocookiespage())->show();

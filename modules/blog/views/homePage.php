@@ -1,18 +1,21 @@
 <?php
 
-namespace blog\views;
+namespace modules\blog\views;
 
 require '/home/yuta/www/_assets/includes/autoloader.php';
+include '/home/yuta/www/modules/blog/models/User.php';
 
 session_start();
 if(!isset($_SESSION["currentUser"])){
     header("Location: connectionPage.php");
     exit();
 }
+
 class Homepage
 {
     public function show(): void {
         ob_start();
+        echo $_SESSION["currentUser"]->getId();
         ?>
 
         <style>
@@ -122,6 +125,52 @@ class Homepage
                                         </svg>
                                     </button>
                                 </div>
+
+                                //boutton pour creer categorie
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCategory">
+                                    Créer Catégorie
+                                </button>
+
+
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="createCategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Nouvelle Catégorie</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+
+                                                <form method="post" action="createCategory.php">
+                                                    <!--                        <label for="titreForm" style="font-size: 35px; margin-bottom: 20px;">Nouvelle Catégorie:</label>
+                                                    -->
+
+                                                    <label for="nom" style="font-weight: bold" class="form-label">NOM:</label><br>
+                                                    <input type="text" class="form-control" id="nom" name="nom" required><br><br>
+
+
+                                                    <label for="description" style="font-weight: bold;" class="form-label">Description:</label><br>
+                                                    <textarea type="text"  class="form-control" id="description" name="description" style="height: 200px;" required></textarea><br><br>
+
+
+
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="reset" class="btn btn-secondary" data-bs-dismiss="modal" value="Fermer">
+                                                <input type="submit" class="btn btn-primary" value="Créer">
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -213,7 +262,7 @@ class Homepage
                         <h1 class="modal-title fs-5" id="staticBackdropLabel">Ecrire un post</h1>
                     </div>
                     <div class="modal-body">
-                        <form action="" method="post" enctype="multipart/form-data">
+                        <form action="creationPost.php" method="post">
                             <div class="mb-3">
                                 <label for="inputTitre" class="form-label">Titre :</label>
                                 <input type="text" class="form-control" id="inputTitre" name="inputTitre" required>
@@ -257,13 +306,11 @@ class Homepage
                 </div>
             </div>
         </div>
-        <form method="post" action="CreateCategory.php">
-            <input type="submit" name="action" value="+">
-        </form>
+
 
         <?php
         $content = ob_get_clean();
-        (new Layout('Yuta', $content))->show();
+        (new layout('Yuta', $content))->show();
     }
 }
 (new Homepage())->show();

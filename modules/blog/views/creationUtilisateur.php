@@ -1,8 +1,8 @@
 <?php
 
-namespace Blog\Views;
+namespace modules\blog\views;
 
-require '../../../_assets/includes/autoloader.php';
+require '/home/yuta/www/_assets/includes/autoloader.php';
 
 class CreationUtilisateur
 {
@@ -135,7 +135,7 @@ ob_start();
 </html>
     <?php
     $content = ob_get_clean();
-    (new \Blog\Views\Layout('Yuta', $content))->show();
+    (new layout('Yuta', $content))->show();
 }
 }
 (new CreationUtilisateur())->show();

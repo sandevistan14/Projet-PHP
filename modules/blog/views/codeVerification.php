@@ -1,8 +1,9 @@
 <?php
 
-namespace Blog\Views;
+namespace modules\blog\views;
 
-require '../../../_assets/includes/autoloader.php';
+require '/home/yuta/www/_assets/includes/autoloader.php';
+
 session_start();
 
 class CodeVerification
@@ -145,7 +146,7 @@ class CodeVerification
 
         <?php
         $content = ob_get_clean();
-        (new \Blog\Views\Layout('Yuta', $content))->show();
+        (new layout('Yuta', $content))->show();
     }
 }
 (new CodeVerification())->show();

@@ -1,10 +1,9 @@
 <?php
 
-namespace _assets\Utils\Class;
+namespace modules\blog\models;
 
 use Cassandra\Date;
 use DateTime;
-use Utils\Class\User;
 
 class Post
 {

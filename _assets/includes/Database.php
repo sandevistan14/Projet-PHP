@@ -1,5 +1,5 @@
 <?php
-namespace _assets\Utils\Class;
+namespace _assets\includes;
 class Database
 {
     private $PDOInstance = null;

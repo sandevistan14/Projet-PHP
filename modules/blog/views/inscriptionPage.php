@@ -1,8 +1,8 @@
 <?php
 
-namespace Blog\Views;
+namespace modules\blog\views;
 
-require '../../../_assets/includes/autoloader.php';
+require '/home/yuta/www/_assets/includes/autoloader.php';
 
 class InscriptionPage
 {
@@ -65,7 +65,6 @@ class InscriptionPage
 
         <div class="container mt-5">
             <div class="row justify-content-center">
-                <a href="/blog/views/ConnectionPage.php"><i class="bi bi-arrow-bar-left mb-4" style="font-size: 2rem;"></i></a>
                 <div class="col-md-6">
                     <h1 class="text-center" id="titre">S'inscrire</h1>
                     <form action="/blog/views/creationUtilisateur.php" class="needs-validation" novalidate method="post">
@@ -107,7 +106,7 @@ class InscriptionPage
                             <input type="submit" class="btn btn-primary btn-lg" id="submitButton" value="Continuer">
                         </div>
                     </form>
-                    <p class="mt-3 text-center">Déjà un compte ? <a href="/blog/views/ConnectionPage.php">Se connecter</a></p>
+                    <p class="mt-3 text-center">Déjà un compte ? <a href="/modules/blog/views/connectionPage.php">Se connecter</a></p>
                 </div>
             </div>
         </div>
@@ -238,7 +237,7 @@ class InscriptionPage
 
         <?php
         $content = ob_get_clean();
-        (new \Blog\Views\Layout('Yuta', $content))->show();
+        (new layout('Yuta', $content))->show();
     }
 }
 (new InscriptionPage())->show();

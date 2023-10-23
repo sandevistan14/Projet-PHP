@@ -1,6 +1,6 @@
 <?php
 
-namespace _assets\utils\class;
+namespace modules\blog\models;
 
 use DateTime;
 

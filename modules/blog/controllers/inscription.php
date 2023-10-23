@@ -1,10 +1,10 @@
 <?php
 
-namespace utils\class;
+namespace _assets\includes;
 
 use PDOException;
 
-require '../../../_assets/includes/autoloader.php';
+require '/home/yuta/www/_assets/includes/autoloader.php';
 
 session_start();
     $query = 'INSERT INTO YUTA_USER (ADMIN_STATUS, MAIL_ADDRESS, USERNAME, PASSWORD, PROFILE_PICTURE, FIRST_LOGIN, LAST_LOGIN, ACTIVE, VERIFICATION_CODE) VALUES

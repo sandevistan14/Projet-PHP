@@ -1,6 +1,6 @@
 <?php
 
-namespace _assets\Utils\Class;
+namespace modules\blog\models;
 
 class Comment
 {
