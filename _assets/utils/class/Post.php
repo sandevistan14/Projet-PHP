@@ -2,20 +2,31 @@
 
 namespace Obj;
 
+use Cassandra\Date;
+use DateTime;
+
 class Post
 {
     private int $IdPost;
-    private Utilisateur $Autor;
-    private $Date;
+    private User $Author;
     private string $Title;
     private string $Text;
+    private DateTime $sendDate;
+    private DateTime $lastEditDate;
 
-    public function __construct(int $ID, Utilisateur $autor, string $title, string $text){
+    public function __construct(int    $ID, User $author, string $title, string $text, string $sendDatedate,
+                                string $lasteditdate){
         $this->IdPost = $ID;
-        $this->Autor = $autor;
+        $this->Author = $author;
         $this->Text = $text;
         $this->Title = $title;
-        date_default_timezone_set('Europe/Paris');
-        $this->Date = date("d/m/Y H:i:s");
+        $this->sendDate = DateTime::createFromFormat( "Y-m-d H:i:s",$sendDatedate,
+            new \DateTimeZone('Europe/Berlin'));
+        $this->lastEditDate = DateTime::createFromFormat( "Y-m-d H:i:s",$lasteditdate,
+            new \DateTimeZone('Europe/Berlin'));
+    }
+
+    public function showPost(){
+
     }
 }

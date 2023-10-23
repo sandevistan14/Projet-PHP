@@ -5,12 +5,12 @@ namespace Obj;
 class Comment
 {
     private int $IdComment;
-    private Utilisateur $Autor;
+    private User $Autor;
     private $BilletDeRef;
     private $Date;
     private string $Text;
 
-    public function __construct(int $Idcomment, Utilisateur $autor, $Billetderef, string $text){
+    public function __construct(int $Idcomment, User $autor, $Billetderef, string $text){
         $this->IdComment = $Idcomment;
         $this->Autor = $autor;
         $this->BilletDeRef = $Billetderef;

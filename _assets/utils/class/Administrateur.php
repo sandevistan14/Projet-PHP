@@ -1,10 +1,11 @@
 <?php
 
 namespace Obj;
+require '../../../_assets/includes/autoloader.php';
 
-use Obj\Utilisateur;
+use Obj\User;
 
-class Administrateur extends Utilisateur
+class Administrateur extends User
 {
     private int $Id;
     private string $LastConnection;
@@ -13,11 +14,11 @@ class Administrateur extends Utilisateur
     public function __construct($UsName)
     {
         parent::__construct($UsName);
-        if (is_null(Utilisateur::$LastId)){
-            Utilisateur::$LastId = 0;
+        if (is_null(User::$LastId)){
+            User::$LastId = 0;
         }
-        $this->Id = Utilisateur::$LastId + 1;
-        Utilisateur::$LastId +=1;
+        $this->Id = User::$LastId + 1;
+        User::$LastId +=1;
         date_default_timezone_set('Europe/Paris');
         $this->FirstConnection = date("d/m/Y H:i:s");
         $this->LastConnection = $this->FirstConnection;

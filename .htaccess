@@ -1,0 +1,4 @@
+ErrorDocument 404 /modules/blog/views/error/error404.html
+
+AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript text/php
+
