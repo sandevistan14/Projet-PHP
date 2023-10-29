@@ -1,0 +1,172 @@
+/******************************************************************************
+*********************** Import font ********************************
+******************************************************************************/
+
+@font-face {
+    font-family: "Jost-Medium";
+    src: url("https://yuta.alwaysdata.net//_assets/fonts/Jost-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Jost-Regular";
+    src: url("https://yuta.alwaysdata.net//_assets/fonts/Jost-Regular.ttf");
+}
+
+/******************************************************************************
+****************************** use font ***************************************
+******************************************************************************/
+
+body, h1, .form-control, .form-control:focus, .form-control::placeholder {
+    font-family: 'Jost', sans-serif;
+}
+
+/******************************************************************************
+******************************** Other ****************************************
+******************************************************************************/
+
+h1 {
+    font-size: 170%;
+    font-weight: bold;
+    font-style: normal;
+    margin-bottom: 13%;
+}
+
+::placeholder{
+    font-size: 75%;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.form-control {
+    background-color: #d8c0ff;
+    border-color: #d8c0ff;
+    color: black;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+.inputCode{
+    width: 50px;
+    height: 50px;
+    margin: 0 1% 0 1%;
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+.btn-primary, .btn-primary:hover {
+    background: linear-gradient(to right, #7623FD, #8E48FF);
+    border-color: #8E48FF;
+    color: white;
+}
+
+.custom-mt {
+    margin-top: 15%;
+}
+
+.custom-mb {
+    margin-bottom: 10%;
+}
+
+#yutaImg {
+    height: 80%;
+}
+
+.offcanvas-size-full {
+    --bs-offcanvas-width: 100% !important;
+}
+
+.navbar {
+    border-bottom: 1px solid lightgrey;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-ancrage {
+    position: fixed;
+    bottom: 10%;
+    left: 85%;
+    border: 0;
+    background: #D8C0FF;
+}
+
+
+.secondary {
+    background-color: #D8C0FF;
+    color: black;
+    border-bottom: 1px solid black;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+.accordion-item {
+    color: black;
+    border-bottom: 1px solid black;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+.SearchBar {
+    height: 50px;
+    font-size: 1.25rem;
+    background-color: #d8c0ff;
+    border-color: #d8c0ff;
+}
+
+.primary, .primary:hover {
+    background: linear-gradient(to right, #7623FD, #8E48FF);
+    border-color: #8E48FF;
+}
+
+.zonemess, .boutonretour, .zonbouton {
+    margin: 5% 10% 10%;
+}
+img.post-pfp{
+    border: 3px solid;
+    border-color: #D8C0FF;
+    padding: 0px;
+}
+img.post{
+    border: 3px solid;
+    border-color: #D8C0FF;
+    padding: 0px;
+    max-width: 350px;
+    max-height: 325px;
+}
+.card-footer{
+    border: none;
+    background-color: white;
+}
+.card-header{
+    border: none;
+    background-color: white;
+}
+.card-body{
+    padding-top: 0.1%;
+}
+.col-2{
+    width: 12%;
+}
+.Username {
+    margin-bottom: 0;
+}
+.MainContent{
+    position: relative;
+    top: 50px;
+}
+.ListPost div.Post:nth-child(5) ~ div.Post{
+    display: none;
+}
+
+/* Bouton LoadMore */
+.btn-load{
+    background-color: white;
+    color: #7623FD;
+    border-top: solid 1px darkgrey;
+    border-bottom: solid 1px darkgrey;
+    border-radius: 0;
+}

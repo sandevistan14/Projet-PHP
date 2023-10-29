@@ -8,8 +8,6 @@ class User
 {
     private int $id;
 
-    private bool $admin_status;
-
     private string $mail_address;
 
     private string $username;
@@ -26,20 +24,23 @@ class User
 
     private string $verification_code;
 
-    public function __construct(int $id, bool $admin_status, string $mail_address, string $username, string $password, string|null $profile_picture, string $first_login, string $last_login, bool $active, string $verification_code)
+    private DateTime $verif_code_send_date;
+
+    public function __construct($user_data)
     {
-        $this->id = $id;
-        $this->admin_status = $admin_status;
-        $this->mail_address = $mail_address;
-        $this->username = $username;
-        $this->password = $password;
-        $this->profile_picture = $profile_picture ?? 'null';
-        $this->first_login = DateTime::createFromFormat( "Y-m-d H:i:s",$first_login,
+        $this->id = $user_data['ID_USER'];
+        $this->mail_address = $user_data['MAIL_ADDRESS'];
+        $this->username = $user_data['USERNAME'];
+        $this->password = $user_data['PASSWORD'];
+        $this->profile_picture = $user_data['PROFILE_PICTURE'] ?? 'null';
+        $this->first_login = DateTime::createFromFormat( "Y-m-d H:i:s",$user_data['FIRST_LOGIN'],
             new \DateTimeZone('Europe/Berlin'));
-        $this->last_login = DateTime::createFromFormat( "Y-m-d H:i:s",$last_login,
+        $this->last_login = DateTime::createFromFormat( "Y-m-d H:i:s",$user_data['LAST_LOGIN'],
             new \DateTimeZone('Europe/Berlin'));
-        $this->active = $active;
-        $this->verification_code = $verification_code;
+        $this->active = $user_data['ACTIVE'];
+        $this->verification_code = $user_data['VERIFICATION_CODE'];
+        $this->verif_code_send_date = DateTime::createFromFormat( "Y-m-d H:i:s",$user_data['VERIF_CODE_SEND_DATE'],
+            new \DateTimeZone('Europe/Berlin'));
     }
 
     public function getId(): int
@@ -50,16 +51,6 @@ class User
     public function setId(int $id): void
     {
         $this->id = $id;
-    }
-
-    public function isAdminStatus(): bool
-    {
-        return $this->admin_status;
-    }
-
-    public function setAdminStatus(bool $admin_status): void
-    {
-        $this->admin_status = $admin_status;
     }
 
     public function getMailAddress(): string
@@ -140,6 +131,19 @@ class User
     public function setVerificationCode(string $verification_code): void
     {
         $this->verification_code = $verification_code;
+    }
+
+    public function isAdmin(): bool
+    {
+        return false;
+    }
+
+    public function sendVerificationCode(): bool
+    {
+        $subject = 'Votre code de vérification YUTA';
+        $message = 'Votre code de vérification est :'.$this->verification_code.'.';
+        $headers = "From: yuta@yutaa.com";
+        return mail($this->getMailAddress(), $subject, $message, $headers);
     }
 
     public function CreatePost(string $title, string $msg): void{}

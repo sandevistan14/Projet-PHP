@@ -10,66 +10,17 @@ class InscriptionPage
         ob_start();
         ?>
 
-        <!DOCTYPE html>
-        <head>
-            <title>Créer un compte</title>
-            <style>
-                h1{
-                    font-family: 'Jost', sans-serif;
-                    font-size: 210%;
-                    font-weight: bold;
-                    font-style: normal;
-                }
-                body{
-                    font-family: 'Jost', sans-serif;
-                }
-                /* Changer la couleur des champs de formulaire en #d8c0ff */
-                .form-control {
-                    font-family: 'Jost', sans-serif;
-                    background-color: #d8c0ff;
-                    border-color: #d8c0ff; /* Changer la couleur de la bordure */
-                }
 
-                /* Personnaliser l'apparence des champs actifs (focus) */
-                .form-control:focus {
-                    background-color: #d8c0ff;
-                    border-color: #d8c0ff;
-                    box-shadow: none; /* Supprimer la mise en évidence */
-                }
 
-                /* Changer la couleur du bouton "S'inscrire" */
-                .btn-primary {
-                    background: linear-gradient(to right,#7623FD,#8E48FF);
-                    border-color: #8E48FF; /* Changer la couleur de la bordure */
-                }
-                .btn-primary:hover{
-                    background: linear-gradient(to right,#7623FD,#8E48FF);
-                    border-color: #8E48FF; /* Changer la couleur de la bordure */
-                }
-                /* Ajouter de l'espace sous le titre */
-                #titre {
-                    margin-bottom: 13%;
-                }
-                .custom-mt {
-                    margin-top: 15%;
-                }
-                .custom-mb{
-                    margin-bottom: 10%;
-                }
-                input::placeholder {
-                    font-size: 80%;
-                }
-            </style>
-        </head>
-        <body>
 
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <h1 class="text-center" id="titre">S'inscrire</h1>
-                    <form action="/blog/views/creationUtilisateur.php" class="needs-validation" novalidate method="post">
+                    <form action="../controllers/inscription.php" class="needs-validation" novalidate method="post">
                         <div class="mb-4 col-8 mx-auto">
-                            <input type="text" placeholder="Nom" class="form-control form-control-lg shadow-sm" id="nom" name="nom" required>
+                            <input type="text" placeholder="Nom" class="form-control form-control-lg shadow-sm" id="username"
+                                   name="username" required>
                             <div class="invalid-feedback">
                                 Veuillez entrer votre nom
                             </div>
@@ -82,7 +33,8 @@ class InscriptionPage
                         </div>
                         <div class="mb-4 col-8 mx-auto">
                             <div class="input-group">
-                                <input type="password" placeholder="Mot de passe" class="form-control form-control-lg shadow-sm" id="password" name="motDePasse" required>
+                                <input type="password" placeholder="Mot de passe" class="form-control form-control-lg shadow-sm" id="password" name="password"
+                                       required>
                                 <button class="btn btn-outline-secondary" type="button" id="showPasswordButton">
                                     <i class="bi bi-eye-slash" id="togglePassword"></i>
                                 </button>
@@ -150,9 +102,6 @@ class InscriptionPage
             })()
         </script>
 
-
-        </body>
-        </html>
 
         <script>
          strength += 25;
@@ -228,11 +177,6 @@ class InscriptionPage
                 })();
 
         </script>
-
-
-
-        </body>
-        </html>
 
 
         <?php

@@ -9,17 +9,7 @@ class Infocookiespage
     public function show(): void {
         ob_start();
 ?>
-    <style>
-        .zonemess {
-            margin: 5% 10% 10%;
-        }
-        .boutonretour {
-            margin: 5%;
-        }
-        .zonbouton {
-            margin: 5%;
-        }
-    </style>
+
 
         <div class="zonbouton"></div>
         <a class="boutonretour" href="/modules/blog/views/connectionPage.php"><i class="bi bi-arrow-bar-left mb-4" style="font-size: 2rem;"></i></a>

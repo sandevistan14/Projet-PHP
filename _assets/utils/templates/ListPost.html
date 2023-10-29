@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<body>
 
-{% for post in posts %}
+<div class="ListPost">
+    {% for post in posts %}
     {{ include('Post.html') }}
-{% endfor %}
+    {% endfor %}
+</div>
+<div class="d-grid gap-2">
+    <button class="btn btn-load load-more" type="button">
+        <span class="spinner-border spinner-border-sm visually-hidden" aria-hidden="true"></span>
+        <span class="text-loading visually-hidden" role="status">Chargement des post...</span>
+        <span class="text-load" role="status">Charger plus de Post</span>
+    </button>
+</div>
 
-</body>
 </html>

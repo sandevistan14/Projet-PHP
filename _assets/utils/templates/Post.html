@@ -1,59 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-<style>
-    img.post-pfp{
-        border: 3px solid;
-        border-color: #D8C0FF;
-        padding: 0px;
-    }
-    img.post{
-        border: 3px solid;
-        border-color: #D8C0FF;
-        padding: 0px;
-        max-width: 350px;
-        max-height: 325px;
-    }
-    .card-footer{
-        border: none;
-        background-color: white;
-    }
-    .card-header{
-        border: none;
-        background-color: white;
-    }
-    .card-body{
-        padding-top: 0.1%;
-    }
-    .col-2{
-        width: 12%;
-    }
-    .Username {
-        margin-bottom: 0;
-    }
-</style>
-
-<div class="card">
+<div class="card Post">
   <div class="card-header">
       <div class="row justify-item-start">
           <div class="col-2">
-              <img src="{{ post.getAuthor().getProfilePicture() }}" alt="" width="40" height="34" class="post-pfp d-inline-block align-text-top img-flex rounded">
+              <img src="{{ post.getAuthor().getProfilePicture() }}" alt="" width="40" height="40" class="post-pfp d-inline-block align-text-top img-flex rounded">
           </div>
           <div class="col-7">
               <p class="Username fw-bold">{{ post.getAuthor().getUsername() }}</p>
-              <p class="fw-lighter">- {{ post.getSendDate().format('Y-m-d H:i:s') }}</p>
+              <p class="fw-lighter">&nbsp;{{ post.getSendDate().format('Y-m-d H:i:s') }}</p>
           </div>
       </div>
   </div>
   <div class="card-body">
     <h5 class="card-title">{{ post.getTitle() }}</h5>
     <p class="card-text">{{ post.getText() }}</p>
-      {% if post.getImageLink() != '' %}
+      {% if post.getPicture() != '' %}
           <button type="button" class="btn mx-auto d-block" data-bs-toggle="modal" data-bs-target="#ModalImg">
-              <img class="img-fluid img-thumbnail post" src="{{ post.getImageLink() }}" alt="">
+              <img class="img-fluid img-thumbnail post" src="{{ post.getPicture() }}" alt="">
           </button>
       {% endif %}
   </div>
@@ -70,12 +35,4 @@
         </button>
   </div>
 </div>
-
-{% if post.getImageLink() != '' %}
-    <div class="modal fade" id="ModalImg" tabindex="-1" aria-labelledby="ModalImgLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <img class="img-fluid" src="{{ post.getImageLink() }}">
-        </div>
-    </div>
-{% endif %}
 </html>

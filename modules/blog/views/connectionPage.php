@@ -9,6 +9,10 @@ session_start();
 class ConnectionPage
 {
     public function show(): void {
+        if(isset($_SESSION["currentUser"])) {
+            header('Location: ../views/homePage.php');
+            exit();
+        }
         ob_start();
 
 ?>
@@ -20,58 +24,13 @@ class ConnectionPage
         });
     </script>
 
-        <!DOCTYPE html>
-        <head>
-            <title>Créer un compte</title>
 
-            <style>
-                body{
-                    font-family: 'Jost', sans-serif;
-                }
-                #yutaImg{
-                    height: 80%;
-                }
-                /* Changer la couleur des champs de formulaire en #d8c0ff */
-                .form-control {
-                    font-family: 'Jost', sans-serif;
-                    background-color: #d8c0ff;
-                    border-color: #d8c0ff; /* Changer la couleur de la bordure */
-                }
-
-                /* Personnaliser l'apparence des champs actifs (focus) */
-                .form-control:focus {
-                    background-color: #d8c0ff;
-                    border-color: #d8c0ff;
-                    box-shadow: none; /* Supprimer la mise en évidence */
-                }
-
-                /* Changer la couleur du bouton "S'inscrire" */
-                .btn-primary {
-                    background: linear-gradient(to right,#7623FD,#8E48FF);
-                    border-color: #8E48FF; /* Changer la couleur de la bordure */
-                }
-                .btn-primary:hover{
-                    background: linear-gradient(to right,#7623FD,#8E48FF);
-                    border-color: #8E48FF; /* Changer la couleur de la bordure */
-                }
-                .custom-mt {
-                    margin-top: 15%;
-                }
-                .custom-mb{
-                    margin-bottom: 10%;
-                }
-                input::placeholder {
-                    font-size: 80%;
-                }
-            </style>
-        </head>
-        <body>
 
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="image-container">
-                        <img src="/favicon.ico" class="rounded mx-auto d-block" id="yutaImg">
+                        <img alt="Logo Yuta" src="/favicon.ico" class="rounded mx-auto d-block" id="yutaImg">
                     </div>
                 </div>
                 <form class="needs-validation" method="post" action="../controllers/auth.php" novalidate>
@@ -109,10 +68,6 @@ class ConnectionPage
                     <p class="mt-3 text-center">Pas encore de compte ? <a href="/modules/blog/views/inscriptionPage.php">S'inscrire</a></p>
                 </div>
             </div>
-        </div>
-
-        <!-- Inclure Bootstrap JS (facultatif, nécessaire pour certaines fonctionnalités) -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
         <script>
             const togglePassword = document.querySelector("#togglePassword");
@@ -149,11 +104,6 @@ class ConnectionPage
             })()
         </script>
 
-
-        </body>
-        </html>
-
-
         <?php
             if (!isset($_COOKIE["WantCookies"])) {
         echo "
@@ -170,8 +120,8 @@ class ConnectionPage
                     </div>
                     <div class=\"modal-footer\">
                         <a href=\"infocookiespage.php\" id=\"buttonCookies\">En apprendre plus</a>
-                        <a href=\"/modules/blog/controllers/cookies/IdontWantCookies.php\"> <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Refuser</button> </a>
-                        <a href=\"/modules/blog/controllers/cookies/IWantCookies.php\"> <button type=\"button\" class=\"btn btn-primary\" data-bs-dismiss=\"modal\">Accepter</button> </a>
+                        <a href=\"/modules/blog/controllers/cookies/IdontWantCookies.php\"> <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Refuser</button> </a> 
+                        <a href=\"/modules/blog/controllers/cookies/IWantCookies.php\"> </a> <button type=\"button\" class=\"btn btn-primary\" data-bs-dismiss=\"modal\">Accepter</button> 
                     </div>
                 </div>
             </div>

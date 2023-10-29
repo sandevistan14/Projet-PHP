@@ -13,18 +13,17 @@ $uploadOk = 1;
 
 //recup utilisateur
 $user = $_SESSION['currentUser'];
-$userId = $user::getId();
+$userId = $user->getId();
 
 //Recup infos générales (titre, message, date);
 $title = $_POST['inputTitre'];
 settype($titre, "string");
 $message = $_POST['inputMsg'];
 settype($message, "string");
-$dateCreatePost = (new \DateTime)->__construct("now", new DateTimeZone("Europe/Berlin"));
-$lastEditPost = $dateCreatePost;
+
 
 //Recup image, upload sur imgur
-if(isset($_POST['inputImg'])){
+if(is_uploaded_file($_FILES ['inputImg'] ['tmp_name'])){
     $check = getimagesize($_FILES["inputImg"]["tmp_name"]);
     if($check !== false) {
         echo "File is an image - " . $check["mime"] . "." . '<br>';
@@ -33,14 +32,14 @@ if(isset($_POST['inputImg'])){
         echo "File is not an image.";
         $uploadOk = 0;
     }
-    if ($_FILES["inputImg"]["size"] > 10000) {
+    if ($_FILES["inputImg"]["size"] > 100000) {
         echo "Sorry, your file is too large.";
         $uploadOk = 0;
     }
     if ($uploadOk == 0) {
         echo "Sorry, your file was not uploaded.";
     } else {
-        $image_source = file_get_contents($_FILES['fileToUpload']['tmp_name']);
+        $image_source = file_get_contents($_FILES['inputImg']['tmp_name']);
 
         $postFields = array('image' => base64_encode($image_source));
 
@@ -59,8 +58,10 @@ if(isset($_POST['inputImg'])){
             $imgurData = $responseArr;
             if(!empty($imgurData)){
                 $imgLink = $imgurData->data->link;
+                echo $imgLink;
             }
         }else{
+            echo 'pas normal';
         }
     }
 } else {
@@ -70,9 +71,9 @@ if(isset($_POST['inputImg'])){
 //Envoie sur bd
 $query = 'INSERT INTO POST 
     (ID_AUTHOR, PARENT_ID, TITLE, TEXT_CONTENT, ATTACHED_PICTURE, SEND_DATE, LAST_EDIT_DATE) 
-    VALUES (?, ?, ?, ?, ?, ?, ?)';
+    VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)';
 $request = Database::getInstance()->prepare($query);
-$request->execute([$userId,null,$title,$message,$imgLink,$dateCreatePost,$lastEditPost]); //rajouter les variables correpsondantes
+$request->execute([$userId,null,$title,$message,$imgLink]); //rajouter les variables correpsondantes
 
 //renvoie sur l'index
 header('Location: ../views/homePage.php');

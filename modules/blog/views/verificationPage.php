@@ -6,7 +6,7 @@ require '/home/yuta/www/_assets/includes/autoloader.php';
 
 session_start();
 
-class CodeVerification
+class VerificationPage
 {
     public function show(): void {
         ob_start();
@@ -114,4 +114,4 @@ class CodeVerification
         (new layout('Yuta', $content))->show();
     }
 }
-(new CodeVerification())->show();
+(new VerificationPage())->show();

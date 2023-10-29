@@ -9,55 +9,6 @@ class CreationUtilisateur
 public function show(): void {
 ob_start();
 ?>
-<!DOCTYPE html>
-<head>
-    <title>Créer un compte</title>
-    <style>
-        h1{
-            font-family: 'Jost', sans-serif;
-            font-size: 210%;
-            font-weight: bold;
-            font-style: normal;
-        }
-        body{
-            font-family: 'Jost', sans-serif;
-        }
-        /* Changer la couleur des champs de formulaire en #d8c0ff */
-        .form-control {
-            font-family: 'Jost', sans-serif;
-            background-color: #d8c0ff;
-            border-color: #d8c0ff; /* Changer la couleur de la bordure */
-        }
-
-        /* Personnaliser l'apparence des champs actifs (focus) */
-        .form-control:focus {
-            background-color: #d8c0ff;
-            border-color: #d8c0ff;
-            box-shadow: none; /* Supprimer la mise en évidence */
-        }
-
-        /* Changer la couleur du bouton "S'inscrire" */
-        .btn-primary {
-            background: linear-gradient(to right,#7623FD,#8E48FF);
-            border-color: #8E48FF; /* Changer la couleur de la bordure */
-        }
-        .btn-primary:hover{
-            background: linear-gradient(to right,#7623FD,#8E48FF);
-            border-color: #8E48FF; /* Changer la couleur de la bordure */
-        }
-        /* Ajouter de l'espace sous le titre */
-        #titre {
-            margin-bottom: 13%;
-        }
-        .custom-mt {
-            margin-top: 15%;
-        }
-        .custom-mb{
-            margin-bottom: 10%;
-        }
-    </style>
-</head>
-<body>
 
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -130,9 +81,6 @@ ob_start();
     })()
 </script>
 
-
-</body>
-</html>
     <?php
     $content = ob_get_clean();
     (new layout('Yuta', $content))->show();
