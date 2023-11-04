@@ -6,23 +6,31 @@ class imageUploader
 {
     private const CLIENT_ID = "a3c7f8605115b04";
     private const API_URL = "https://api.imgur.com/3/image";
-    private const MAX_SIZE_LIMIT = 1e+7;
+    private const MAX_SIZE_LIMIT = 99999999;
 
-    public static function uploadPicture($file_info){
+    /**
+     * @param $file_info
+     * @return false|mixed
+     */
+    public static function uploadPicture($tmp_name,$size){
         // check if file is a real image and is under the size limit
-        if (getimagesize($file_info["tmp_name"]) && $file_info['size'] < self::MAX_SIZE_LIMIT){
-            $image_source = file_get_contents($file_info['tmp_name']);
+//        getimagesize($file_info["tmp_name"]) && $file_info['size'] < self::MAX_SIZE_LIMIT
+        if ($size <= self::MAX_SIZE_LIMIT){
+            $image_source = file_get_contents($tmp_name);
             $postFields = array('image' => base64_encode($image_source));
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, self::API_URL);
-            curl_setopt($ch, CURLOPT_POST, TRUE);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . self::CLIENT_ID));
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+            curl_setopt_array($ch, array(
+                CURLOPT_URL=> self::API_URL,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_POST => 1,
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_HTTPHEADER => array('Authorization: Client-ID ' . self::CLIENT_ID),
+                CURLOPT_POSTFIELDS => $postFields
+            ));
             $response = curl_exec($ch);
             curl_close($ch);
             $imgurData = json_decode($response);
-            // check a imgur link was created
+            // check if an imgur link was created
             if(!empty($imgurData->data->link)){
                 return $imgurData;
             }

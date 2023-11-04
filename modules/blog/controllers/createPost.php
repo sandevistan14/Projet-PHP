@@ -3,17 +3,14 @@
 namespace _assets\includes;
 
 require '/home/yuta/www/_assets/includes/autoloader.php';
+include '../models/imageUploader.php';
 
+use blog\models\imageUploader;
 use DateTime;
 use DateTimeZone;
 
-session_start();
-$client_id = "745432d53688fc5";
-$uploadOk = 1;
 
-//recup utilisateur
-$user = $_SESSION['currentUser'];
-$userId = $user->getId();
+session_start();
 
 //Recup infos générales (titre, message, date);
 $title = $_POST['inputTitre'];
@@ -21,61 +18,66 @@ settype($titre, "string");
 $message = $_POST['inputMsg'];
 settype($message, "string");
 
+//Recupération des catégories
+$NbselectDisplayed = $_POST["NbselectDisplayed"];
+$listCatOfPost = [];
+if($NbselectDisplayed == 1){
+    $cat1 = $_POST['Categorie1'];
+    settype($cat1, "int");
+    array_push($listCatOfPost, $cat1);
+}
+if ($NbselectDisplayed == 2){
+    $cat1 = $_POST['Categorie1'];
+    settype($cat1, "int");
+    if ($_POST['Categorie2'] != $_POST['Categorie1']){
+        $cat2 = $_POST['Categorie2'];
+        array_push($listCatOfPost, $cat1, $cat2);
+    }
+    else{
+        array_push($listCatOfPost, $cat1);
+    }
+}
+if ($NbselectDisplayed == 3){
+    $cat1 = $_POST['Categorie1'];
+    settype($cat1, "int");
+    if ($_POST['Categorie2'] != $_POST['Categorie1']){
+        $cat2 = $_POST['Categorie2'];
+        if ($_POST['Categorie3'] != $_POST['Categorie1'] && $_POST['Categorie3'] != $_POST['Categorie2'] ){
+            $cat3 = $_POST['Categorie3'];
+            array_push($listCatOfPost, $cat1, $cat2, $cat3);
+        }
+        else{
+            array_push($listCatOfPost, $cat1, $cat2);
+        }
+    }
+    else{
+        array_push($listCatOfPost, $cat1);
+    }
+}
+if ($NbselectDisplayed == 0){
+    //Mettre par défaut la catégorie Divers
+    $listCatOfPost[] = 1;
+}
+
 
 //Recup image, upload sur imgur
 if(is_uploaded_file($_FILES ['inputImg'] ['tmp_name'])){
-    $check = getimagesize($_FILES["inputImg"]["tmp_name"]);
-    if($check !== false) {
-        echo "File is an image - " . $check["mime"] . "." . '<br>';
-        $uploadOk = 1;
-    } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
-    }
-    if ($_FILES["inputImg"]["size"] > 100000) {
-        echo "Sorry, your file is too large.";
-        $uploadOk = 0;
-    }
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
-    } else {
-        $image_source = file_get_contents($_FILES['inputImg']['tmp_name']);
-
-        $postFields = array('image' => base64_encode($image_source));
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://api.imgur.com/3/image');
-        curl_setopt($ch, CURLOPT_POST, TRUE);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . $client_id));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        $responseArr = json_decode($response);
-
-        if(!empty($responseArr->data->link)){
-            $imgurData = $responseArr;
-            if(!empty($imgurData)){
-                $imgLink = $imgurData->data->link;
-                echo $imgLink;
-            }
-        }else{
-            echo 'pas normal';
-        }
-    }
+    $upload_data = imageUploader::uploadPicture($_FILES['inputImg']['tmp_name'],$_FILES['inputImg']['size']);
+    if($upload_data)
+        $imgLink = $upload_data->data->link;
 } else {
     $imgLink = null;
 }
 
-//Envoie sur bd
-$query = 'INSERT INTO POST 
-    (ID_AUTHOR, PARENT_ID, TITLE, TEXT_CONTENT, ATTACHED_PICTURE, SEND_DATE, LAST_EDIT_DATE) 
-    VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)';
-$request = Database::getInstance()->prepare($query);
-$request->execute([$userId,null,$title,$message,$imgLink]); //rajouter les variables correpsondantes
-
-//renvoie sur l'index
-header('Location: ../views/homePage.php');
-exit();
+// création de post
+if($_SESSION['currentUser']->CreatePost($title,$message,$imgLink,$listCatOfPost)){
+    // création réussie
+    header('Location: ../views/homePage.php?postCreated=1');
+    exit();
+}
+else {
+    // création échouée
+    header('Location: ../views/homePage.php?postCreated=0');
+    exit();
+}
 ?>

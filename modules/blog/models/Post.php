@@ -2,109 +2,204 @@
 
 namespace modules\blog\models;
 
-use Cassandra\Date;
+
 use DateTime;
 
 class Post
 {
     private int $IdPost;
     private User $Author;
-    private string $Title;
-    private string $Text;
-    private string $Picture;
+    private string $title;
+    private string $text;
+    private string $picture;
     private DateTime $sendDate;
     private DateTime $lastEditDate;
+    private int $likesNumber;
+    private int $commentsNumber;
+    private $categories = array();
 
-    public function __construct(int    $ID, User $author, string $title, string $text, string $picture,string $sendDatedate,
-                                string $lasteditdate){
-        $this->IdPost = $ID;
-        $this->Author = $author;
-        $this->Text = $text;
-        $this->Picture = $picture;
-        $this->Title = $title;
-        $this->sendDate = DateTime::createFromFormat( "Y-m-d H:i:s",$sendDatedate,
+    public function __construct($post_data,array $categories){
+        $this->IdPost = $post_data['ID_POST'];
+        $this->Author = \UserRepository::getUserById($post_data['ID_AUTHOR']);
+        $this->title = $post_data['TITLE'] ?? '';
+        $this->text = $post_data['TEXT_CONTENT'];
+        $this->picture = $post_data['ATTACHED_PICTURE'] ?? 'null';
+        $this->sendDate = DateTime::createFromFormat( "Y-m-d H:i:s",$post_data['SEND_DATE'],
             new \DateTimeZone('Europe/Berlin'));
-        $this->lastEditDate = DateTime::createFromFormat( "Y-m-d H:i:s",$lasteditdate,
+        $this->lastEditDate = DateTime::createFromFormat( "Y-m-d H:i:s",$post_data['LAST_EDIT_DATE'],
             new \DateTimeZone('Europe/Berlin'));
+        $this->likesNumber = $post_data['LIKE_NUMBER'];
+        $this->categories = $categories;
     }
 
+    /**
+     * @return bool
+     */
     public function isAdmin(): bool
     {
         return true;
     }
 
+    /**
+     * @return void
+     */
     public function showPost(){
 
     }
 
+    /**
+     * @return int
+     */
     public function getIdPost(): int
     {
         return $this->IdPost;
     }
 
+    /**
+     * @param int $IdPost
+     * @return void
+     */
     public function setIdPost(int $IdPost): void
     {
         $this->IdPost = $IdPost;
     }
 
+    /**
+     * @return User
+     */
     public function getAuthor(): User
     {
         return $this->Author;
     }
 
+    /**
+     * @param User $Author
+     * @return void
+     */
     public function setAuthor(User $Author): void
     {
         $this->Author = $Author;
     }
 
+    /**
+     * @return string
+     */
     public function getTitle(): string
     {
-        return $this->Title;
+        return $this->title;
     }
 
-    public function setTitle(string $Title): void
+    /**
+     * @param string $title
+     * @return void
+     */
+    public function setTitle(string $title): void
     {
-        $this->Title = $Title;
+        $this->title = $title;
     }
 
+    /**
+     * @return string
+     */
     public function getText(): string
     {
-        return $this->Text;
+        return $this->text;
     }
 
-    public function setText(string $Text): void
+    /**
+     * @param string $text
+     * @return void
+     */
+    public function setText(string $text): void
     {
-        $this->Text = $Text;
+        $this->text = $text;
     }
 
+    /**
+     * @return string
+     */
     public function getPicture(): string
     {
-        return $this->Picture;
+        return $this->picture;
     }
 
-    public function setPicture(string $Picture): void
+    /**
+     * @param string $picture
+     * @return void
+     */
+    public function setPicture(string $picture): void
     {
-        $this->Picture = $Picture;
+        $this->picture = $picture;
     }
 
+    /**
+     * @return DateTime
+     */
     public function getSendDate(): DateTime
     {
         return $this->sendDate;
     }
 
+    /**
+     * @param DateTime $sendDate
+     * @return void
+     */
     public function setSendDate(DateTime $sendDate): void
     {
         $this->sendDate = $sendDate;
     }
 
+    /**
+     * @return DateTime
+     */
     public function getLastEditDate(): DateTime
     {
         return $this->lastEditDate;
     }
 
+    /**
+     * @param DateTime $lastEditDate
+     * @return void
+     */
     public function setLastEditDate(DateTime $lastEditDate): void
     {
         $this->lastEditDate = $lastEditDate;
     }
-    
+
+    public function getLikesNumber(): int
+    {
+        return $this->likesNumber;
+    }
+
+    public function setLikesNumber(int $likesNumber): void
+    {
+        $this->likesNumber = $likesNumber;
+    }
+
+    public function getCommentsNumber(): int
+    {
+        return $this->commentsNumber;
+    }
+
+    public function setCommentsNumber(int $commentsNumber): void
+    {
+        $this->commentsNumber = $commentsNumber;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCategories(): array
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param array $categories
+     * @return void
+     */
+    public function setCategories(array $categories): void
+    {
+        $this->categories = $categories;
+    }
 }

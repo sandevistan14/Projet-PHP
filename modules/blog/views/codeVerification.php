@@ -8,27 +8,27 @@ session_start();
 
 class CodeVerification
 {
-    public function show(): void {
+    public function show(): void
+    {
         ob_start();
 
         ?>
 
 
-
         <div class="form-container">
-        <form action="#">
-            <h1 class="text-center mb-4">Veuillez entrer le code</h1>
-            <div class="d-flex mb-3">
-                <input type="tel" maxlength="1" pattern="[0-9]" class="form-control inputCode">
-                <input type="tel" maxlength="1" pattern="[0-9]" class="form-control inputCode">
-                <input type="tel" maxlength="1" pattern="[0-9]" class="form-control inputCode">
-                <input type="tel" maxlength="1" pattern="[0-9]" class="form-control inputCode">
-                <input type="tel" maxlength="1" pattern="[0-9]" class="form-control inputCode">
-            </div>
-            <div class="d-grid gap-2 col-8 mx-auto custom-mt custom-mb">
-                <button type="submit" class="btn btn-primary btn-lg" id="submitButton">Se connecter</button>
-            </div>
-        </form>
+            <form action="#">
+                <h1 class="text-center mb-4">Veuillez entrer le code</h1>
+                <div class="d-flex mb-3">
+                    <input type="tel" maxlength="1" pattern="[0-9]" class="form-control inputCode">
+                    <input type="tel" maxlength="1" pattern="[0-9]" class="form-control inputCode">
+                    <input type="tel" maxlength="1" pattern="[0-9]" class="form-control inputCode">
+                    <input type="tel" maxlength="1" pattern="[0-9]" class="form-control inputCode">
+                    <input type="tel" maxlength="1" pattern="[0-9]" class="form-control inputCode">
+                </div>
+                <div class="d-grid gap-2 col-8 mx-auto custom-mt custom-mb">
+                    <button type="submit" class="btn btn-primary btn-lg" id="submitButton">Se connecter</button>
+                </div>
+            </form>
         </div>
 
         <script>
@@ -92,7 +92,7 @@ class CodeVerification
                 })
 
                 input.addEventListener('keydown', e => {
-                    switch(e.keyCode) {
+                    switch (e.keyCode) {
                         case KEYBOARDS.backspace:
                             handleBackspace(e)
                             break
@@ -114,4 +114,5 @@ class CodeVerification
         (new layout('Yuta', $content))->show();
     }
 }
+
 (new CodeVerification())->show();

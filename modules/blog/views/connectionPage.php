@@ -52,8 +52,7 @@ class ConnectionPage
                             </div>
                         </div>
                         <?php
-                        if (isset($_SESSION['connection_error'])) {
-                            unset($_SESSION['connection_error']);
+                        if (isset($_GET['connection_error'])) {
                             $error_message = '// MESSAGE D\'ERREUR A AJOUTER ICI SOUS FORME DE DIV //';
                             echo $error_message;
                         }
@@ -120,26 +119,14 @@ class ConnectionPage
                     </div>
                     <div class=\"modal-footer\">
                         <a href=\"infocookiespage.php\" id=\"buttonCookies\">En apprendre plus</a>
-                        <a href=\"/modules/blog/controllers/cookies/IdontWantCookies.php\"> <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Refuser</button> </a> 
-                        <a href=\"/modules/blog/controllers/cookies/IWantCookies.php\"> </a> <button type=\"button\" class=\"btn btn-primary\" data-bs-dismiss=\"modal\">Accepter</button> 
+                        <a href=\"/modules/blog/controllers/cookies/IdontWantCookies.php\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Refuser </a> 
+                        <a href=\"/modules/blog/controllers/cookies/IWantCookies.php\" class=\"btn btn-primary\" data-bs-dismiss=\"modal\">Accepter </a> 
                     </div>
                 </div>
             </div>
-        </div>
-
-</html>
-
-<style>
-    #buttonCookies {
-        text-align: left;
-    }
-</style>
-    ";
+        </div>";
             }
-            ?>
 
-
-<?php
         $content = ob_get_clean();
         (new layout('Yuta', $content))->show();
     }

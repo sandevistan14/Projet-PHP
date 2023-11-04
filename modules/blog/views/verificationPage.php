@@ -5,6 +5,14 @@ namespace modules\blog\views;
 require '/home/yuta/www/_assets/includes/autoloader.php';
 
 session_start();
+if(!isset($_SESSION["currentUser"])){
+    header("Location: connectionPage.php");
+    exit();
+}
+if($_SESSION['currentUser']->isActive()){
+    header("Location: homePage.php");
+    exit();
+}
 
 class VerificationPage
 {
@@ -16,18 +24,21 @@ class VerificationPage
 
 
         <div class="form-container">
-        <form action="#">
+        <form action="../controllers/verification.php" method="post">
             <h1 class="text-center mb-4">Veuillez entrer le code</h1>
+            <p class="text-center">Nous avons envoyé un code de vérification à
+            <?php echo $_SESSION['currentUser']->getMailAddress(); ?></p>
             <div class="d-flex mb-3">
-                <input type="tel" maxlength="1" pattern="[0-9]" class="form-control inputCode">
-                <input type="tel" maxlength="1" pattern="[0-9]" class="form-control inputCode">
-                <input type="tel" maxlength="1" pattern="[0-9]" class="form-control inputCode">
-                <input type="tel" maxlength="1" pattern="[0-9]" class="form-control inputCode">
-                <input type="tel" maxlength="1" pattern="[0-9]" class="form-control inputCode">
+                <input type="tel" maxlength="1" pattern="[0-9]" name='1' id='1' class="form-control inputCode">
+                <input type="tel" maxlength="1" pattern="[0-9]" name='2' id='2' class="form-control inputCode">
+                <input type="tel" maxlength="1" pattern="[0-9]" name='3' id='3' class="form-control inputCode">
+                <input type="tel" maxlength="1" pattern="[0-9]" name='4' id='4' class="form-control inputCode">
+                <input type="tel" maxlength="1" pattern="[0-9]" name='5' id='5' class="form-control inputCode">
             </div>
             <div class="d-grid gap-2 col-8 mx-auto custom-mt custom-mb">
                 <button type="submit" class="btn btn-primary btn-lg" id="submitButton">Se connecter</button>
             </div>
+            <p class="text-center"><a href="../controllers/verification.php?resend=1">Renvoyer le code</a></p>
         </form>
         </div>
 
