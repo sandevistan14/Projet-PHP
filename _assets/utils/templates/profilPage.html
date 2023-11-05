@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top bg-light">
     <div class="container-fluid">
-        <a  href="../../../modules/blog/views/homePage.php" type="button" class="btn" aria-label="Return">
+        <a  href="https://yuta.alwaysdata.net/" type="button" class="btn" aria-label="Return">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
             </svg>
@@ -33,7 +33,32 @@
                             <h6 class="text-body-secondary"><strong>A rejoint le :</strong>{{ UserProfil.getFirstLogin().format('d-m-Y') }}</h6>
                         </div>
                     </div>
-
+                    {% if currentUser.isAdmin == true %}
+                    <div id="deletePostIconContainer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" id="deletePostIcon" data-bs-toggle="modal" data-bs-target="#deleteProfileModal">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                        </svg>
+                    </div>
+                    <!-- Modal for deleting post  -->
+                    <div class="modal fade" id="deleteProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Supprimer profil</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Êtes-vous sûr de vouloir supprimer ce profil?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                    <a href="../../../modules/blog/controllers/deleteUser.php?ID_USER= {{ UserProfil.getId() }}" class="btn btn-danger" id="confirmDelete">Supprimer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
                 <div id="LastLog-profil" class="d-flex justify-content-lg-start">
                     <div id="icon-calendar2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
@@ -56,29 +81,31 @@
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item flex-fill" role="presentation">
             <div class="d-grid gap-2">
-                <button class="nav-link active" id="Post-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Posts</button>
+                <button class="nav-link link-tab active" id="Post-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Posts</button>
             </div>
         </li>
         <li class="nav-item flex-fill" role="presentation">
             <div class="d-grid gap-2">
-                <button class="nav-link" id="Comment-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Réponses</button>
+                <button class="nav-link link-tab" id="Comment-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Réponses</button>
             </div>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="Post-tab" tabindex="0">
-            {% if posts|length == 0 %}
-                <h5 class="fw-bold"> Il n'y a rien pour le moment</h5>
-            {% else %}
+            {% if posts|length > 0 %}
                 {{ include('ListPost.html') }}
+            {% else %}
+                <h5 class="fw-bold text-center"> Il n'y a rien pour le moment</h5>
             {% endif %}
         </div>
         <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="Comment-tab" tabindex="0">
-            <div class="d-flex justify-content-center">
-                {% if comments|length == 0 %}
-                    <h5 class="fw-bold"> Il n'y a rien pour le moment</h5>
+            <div class="ListPost">
+                {% if comments|length > 0 %}
+                    {% for post in comments %}
+                        {{ include('Comment.html') }}
+                    {% endfor %}
                 {% else %}
-                    caca
+                    <h5 class="fw-bold text-center"> Il n'y a rien pour le moment</h5>
                 {% endif %}
             </div>
         </div>
@@ -102,7 +129,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="inputModifyImg" class="form-label">Modifier photo de profil</label>
-                            <input type="file" class="form-control" id="inputModifyImg" name="inputModifyImg" accept="image/*">
+                            <input type="file" class="form-control" id="inputModifyImg" name="inputModifyImg" accept="image/png, image/jpeg">
                         </div>
                         <div class="modal-footer">
                             <input type="reset" class="btn btn-secondary" data-bs-dismiss="modal" value="Annuler">

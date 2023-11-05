@@ -9,9 +9,28 @@ include_once '/home/yuta/www/modules/blog/models/PostRepository.php';
 ?>
 <script src="https://yuta.alwaysdata.net/_assets/scripts/ButtonLoadMore.js"></script>
 <?php
-session_start();
 class ProfilPage
 {
+    private $posts;
+    private $comments;
+    private $currentUser;
+    private $userProfile;
+
+    /**
+     * @param $posts
+     * @param $comments
+     * @param $currentUser
+     * @param $userProfile
+     */
+    public function __construct($currentUser, $posts, $comments, $userProfile)
+    {
+        $this->posts = $posts;
+        $this->comments = $comments;
+        $this->currentUser = $currentUser;
+        $this->userProfile = $userProfile;
+    }
+
+
     public function show(): void {
         ob_start();
 
@@ -19,17 +38,10 @@ class ProfilPage
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../../../_assets/utils/templates');
         $twig = new \Twig\Environment($loader, ['cache' => false,]);
 
-        $idUserProfil = $_GET['id_user_profil'];
-        $UserProfil = \UserRepository::getUserById($idUserProfil);
-        $posts = \PostRepository::getListPostOfUser($UserProfil); //Modif pour que soit user
-        $currentUser = $_SESSION["currentUser"];
-        $comments = array();
-        echo $twig->render('profilPage.html', ['posts' => $posts, 'comments'=> $comments, 'currentUser' => $currentUser, 'UserProfil' => $UserProfil]);
 
-
+        echo $twig->render('profilPage.html', ['posts' => $this->posts, 'comments'=> $this->comments, 'currentUser' => $this->currentUser, 'UserProfil' => $this->userProfile]);
 
         $content = ob_get_clean();
         (new layout('Yuta', $content))->show();
     }
 }
-(new ProfilPage())->show();

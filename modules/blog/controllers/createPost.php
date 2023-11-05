@@ -72,12 +72,12 @@ if(is_uploaded_file($_FILES ['inputImg'] ['tmp_name'])){
 // création de post
 if($_SESSION['currentUser']->CreatePost($title,$message,$imgLink,$listCatOfPost)){
     // création réussie
-    header('Location: ../views/homePage.php?postCreated=1');
+    header('Location: https://yuta.alwaysdata.net/?postCreated=1');
     exit();
 }
 else {
     // création échouée
-    header('Location: ../views/homePage.php?postCreated=0');
+    header('Location: https://yuta.alwaysdata.net/?postCreated=0');
     exit();
 }
 ?>

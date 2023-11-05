@@ -2,8 +2,8 @@
 
 namespace modules\blog\models;
 
-require '../../../_assets/includes/autoloader.php';
-include_once '../models/imageUploader.php';
+require '/home/yuta/www/_assets/includes/autoloader.php';
+include_once '/home/yuta/www/modules/blog/models/imageUploader.php';
 
 use blog\models\imageUploader;
 use _assets\includes\Database;
@@ -223,6 +223,14 @@ class User
         return mail($this->getMailAddress(), $subject, $message, $headers);
     }
 
+    public function sendForgetPasswordCode($code): bool
+    {
+        $subject = 'Votre code de vérification YUTA';
+        $format = "Voici votre nouveau mot de passe: %s. (expirant dans une heure) (ne l'oubliez pas cette fois :D)";
+        $headers = "From: yuta@yutaa.com";
+        return mail($this->getMailAddress(), $subject, sprintf($format,$code,$this->id), $headers);
+    }
+
     /**
      * @param string $title
      * @param string $msg
@@ -250,10 +258,21 @@ class User
 
     /**
      * @param $msg
-     * @param $billet
-     * @return void
+     * @param $parent_id
+     * @return bool
      */
-    public function CreateComment($msg, $billet) : void{}
+    public function CreateComment($msg,$imgLink,$parent_id) : bool{
+//        return false;
+        $query = 'INSERT INTO POST 
+        (ID_AUTHOR, PARENT_ID, TITLE, TEXT_CONTENT, ATTACHED_PICTURE, SEND_DATE, LAST_EDIT_DATE) 
+        VALUES (?, ?, NULL, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)';
+        $request = Database::getInstance()->prepare($query);
+        try {
+            $request->execute([$this->id, $parent_id, $msg, $imgLink]);
+            return true;
+        }
+        catch(\PDOException $exception) {return false;}
+    }
 
     public function ModifyUsername(string $NewUsername) : void{
         $this->username = $NewUsername;
@@ -262,7 +281,7 @@ class User
         $request->execute([$NewUsername, $this->id]);
     }
     public function ModifyPfp($NewImage) : void{
-        $upload_data = imageUploader::uploadPicture($NewImage);
+        $upload_data = imageUploader::uploadPicture($NewImage['tmp_name'],$NewImage['size']);
         if($upload_data){
             $imgLink = $upload_data->data->link;
         } else {
@@ -272,5 +291,17 @@ class User
         $query = 'UPDATE YUTA_USER SET PROFILE_PICTURE = ? WHERE ID_USER = ?';
         $request = Database::getInstance()->prepare($query);
         $request->execute([$imgLink, $this->id]);
+    }
+
+    public function LikePost(int $IDPost){
+        $query = 'INSERT INTO LIKE_TABLE (LIKED_POST, USER_ID, LIKE_DATE)
+                VALUES (? , ?, CURRENT_TIMESTAMP)';
+        $request = Database::getInstance()->prepare($query);
+        $request->execute([$IDPost,$this->id]);
+    }
+    public function UnlikePost(int $IDPost){
+        $query = 'DELETE FROM LIKE_TABLE WHERE LIKED_POST = ? AND USER_ID = ?';
+        $request = Database::getInstance()->prepare($query);
+        $request->execute([$IDPost,$this->id]);
     }
 }

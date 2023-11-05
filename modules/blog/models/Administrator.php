@@ -37,6 +37,17 @@ class Administrator extends User
             return false;
         }
     }
+    public function ModifyCategoryName(int $IdCat,string $NewNameCat){
+        $query = 'UPDATE CATEGORY SET CATEGORY_NAME = ? WHERE ID_CATEGORY = ?';
+        $request = Database::getInstance()->prepare($query);
+        $request->execute([$NewNameCat, $IdCat]);
+    }
+
+    public function ModifyCategoryDescription(int $IdCat,string $NewDescCat){
+        $query = 'UPDATE CATEGORY SET CATEGORY_DESCRIPTION = ? WHERE ID_CATEGORY = ?';
+        $request = Database::getInstance()->prepare($query);
+        $request->execute([$NewDescCat, $IdCat]);
+    }
 
     /**
      * @param $Post
@@ -50,6 +61,9 @@ class Administrator extends User
         $query = 'DELETE FROM LIKE_TABLE WHERE LIKED_POST=?';
         $request = Database::getInstance()->prepare($query);
         $request->execute([$IdPost]);
+        $query = 'UPDATE POST SET PARENT_ID = NULL WHERE PARENT_ID = ?';
+        $request = Database::getInstance()->prepare($query);
+        $request->execute([$IdPost]);
         $query = 'DELETE FROM POST WHERE ID_POST=?';
         $request = Database::getInstance()->prepare($query);
         $request->execute([$IdPost]);
@@ -60,10 +74,16 @@ class Administrator extends User
      */
     public function DeleteUser($User): void {
         $IdUser = $User->getId();
-        $query = 'DELETE FROM POST WHERE ID_AUTHOR=?';
+        $query = 'DELETE FROM POSTS_CATEGORY WHERE ID_POST IN (SELECT ID_POST FROM POST WHERE ID_AUTHOR = ?)';
+        $request = Database::getInstance()->prepare($query);
+        $request->execute([$IdUser]);
+        $query = 'UPDATE POST SET PARENT_ID = NULL WHERE PARENT_ID IN (SELECT ID_POST FROM POST WHERE ID_AUTHOR = ?)';
         $request = Database::getInstance()->prepare($query);
         $request->execute([$IdUser]);
         $query = 'DELETE FROM LIKE_TABLE WHERE USER_ID=?';
+        $request = Database::getInstance()->prepare($query);
+        $request->execute([$IdUser]);
+        $query = 'DELETE FROM POST WHERE ID_AUTHOR=?';
         $request = Database::getInstance()->prepare($query);
         $request->execute([$IdUser]);
         $query = 'DELETE FROM YUTA_USER WHERE ID_USER=?';

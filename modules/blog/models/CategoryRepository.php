@@ -1,6 +1,7 @@
 <?php
 
 require '/home/yuta/www/_assets/includes/autoloader.php';
+
 class CategoryRepository
 {
     /**
@@ -19,6 +20,23 @@ class CategoryRepository
             array_push($listCat, $tmpCat);
         }
         return $listCat;
+    }
+
+    public static function getCatByName(string $NAME_CATEGORY){
+        $query = 'SELECT * FROM CATEGORY WHERE CATEGORY_NAME = ?';
+        $request = _assets\includes\Database::getInstance()->prepare($query);
+        $request->execute([$NAME_CATEGORY]);
+        $resCatByName = $request->fetch();
+        $Category = new modules\blog\models\Category($resCatByName["ID_CATEGORY"], $resCatByName["CATEGORY_NAME"], $resCatByName["CATEGORY_DESCRIPTION"]);
+        return $Category;
+    }
+    public static function getCatById(int $ID_CATEGORY){
+        $query = 'SELECT * FROM CATEGORY WHERE ID_CATEGORY = ?';
+        $request = _assets\includes\Database::getInstance()->prepare($query);
+        $request->execute([$ID_CATEGORY]);
+        $resCatByName = $request->fetch();
+        $Category = new modules\blog\models\Category($resCatByName["ID_CATEGORY"], $resCatByName["CATEGORY_NAME"], $resCatByName["CATEGORY_DESCRIPTION"]);
+        return $Category;
     }
 
     /**

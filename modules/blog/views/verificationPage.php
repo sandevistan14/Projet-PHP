@@ -4,30 +4,39 @@ namespace modules\blog\views;
 
 require '/home/yuta/www/_assets/includes/autoloader.php';
 
-session_start();
-if(!isset($_SESSION["currentUser"])){
-    header("Location: connectionPage.php");
-    exit();
-}
-if($_SESSION['currentUser']->isActive()){
-    header("Location: homePage.php");
-    exit();
-}
+//session_start();
+//if(!isset($_SESSION["currentUser"])){
+//    header("Location: connectionPage.php");
+//    exit();
+//}
+//if($_SESSION['currentUser']->isActive()){
+//    header("Location: homePage.php");
+//    exit();
+//}
 
 class VerificationPage
 {
+    private $user;
+    private$verification_error;
+
+    /**
+     * @param $user
+     * @param $verification_error
+     */
+    public function __construct($user, $verification_error)
+    {
+        $this->user = $user;
+        $this->verification_error = $verification_error;
+    }
+
     public function show(): void {
         ob_start();
-
         ?>
-
-
-
         <div class="form-container">
-        <form action="../controllers/verification.php" method="post">
+        <form action="modules/blog/controllers/verification.php" method="post">
             <h1 class="text-center mb-4">Veuillez entrer le code</h1>
             <p class="text-center">Nous avons envoyé un code de vérification à
-            <?php echo $_SESSION['currentUser']->getMailAddress(); ?></p>
+            <?php echo $this->user->getMailAddress(); ?></p>
             <div class="d-flex mb-3">
                 <input type="tel" maxlength="1" pattern="[0-9]" name='1' id='1' class="form-control inputCode">
                 <input type="tel" maxlength="1" pattern="[0-9]" name='2' id='2' class="form-control inputCode">
@@ -38,7 +47,7 @@ class VerificationPage
             <div class="d-grid gap-2 col-8 mx-auto custom-mt custom-mb">
                 <button type="submit" class="btn btn-primary btn-lg" id="submitButton">Se connecter</button>
             </div>
-            <p class="text-center"><a href="../controllers/verification.php?resend=1">Renvoyer le code</a></p>
+            <p class="text-center"><a href="modules/blog/controllers/verification.php?resend=1">Renvoyer le code</a></p>
         </form>
         </div>
 
@@ -125,4 +134,3 @@ class VerificationPage
         (new layout('Yuta', $content))->show();
     }
 }
-(new VerificationPage())->show();

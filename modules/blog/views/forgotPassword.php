@@ -59,12 +59,12 @@
 
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <a href="/modules/blog/views/connectionPage.php"><i class="bi bi-arrow-bar-left mb-4" style="font-size: 2rem;"></i></a>
+        <a href="https://yuta.alwaysdata.net"><i class="bi bi-arrow-bar-left mb-4" style="font-size: 2rem;"></i></a>
         <div class="col-md-6">
             <h1 class="text-center" id="titre">Mot de passe oublié</h1>
-            <form class="needs-validation" novalidate>
+            <form action="../controllers/forgetPassword.php" method="post" class="needs-validation" novalidate>
                 <div class="mb-4 col-8 mx-auto">
-                    <input type="email" placeholder="Email" class="form-control form-control-lg shadow-sm" id="nom" name="nom" required>
+                    <input type="email" placeholder="Email" class="form-control form-control-lg shadow-sm" id="mail" name="mail" required>
                     <div class="invalid-feedback">
                         Veuillez entrer votre Email
                     </div>

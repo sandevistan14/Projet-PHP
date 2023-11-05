@@ -11,8 +11,8 @@ session_start();
     if ($registration){
         $_SESSION['currentUser'] = $registration;
         $_SESSION['currentUser']->sendVerificationCode();
-        header('Location: ../views/verificationPage.php');
+        header('Location: https://yuta.alwaysdata.net/');
     }
     else {
-        header('Location: ../views/inscriptionPage.php?inscription_error=1');
+        header('Location: https://yuta.alwaysdata.net/?inscription_error=1');
     }

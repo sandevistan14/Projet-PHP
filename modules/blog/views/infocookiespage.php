@@ -12,7 +12,7 @@ class Infocookiespage
 
 
         <div class="zonbouton"></div>
-        <a class="boutonretour" href="/modules/blog/views/connectionPage.php"><i class="bi bi-arrow-bar-left mb-4" style="font-size: 2rem;"></i></a>
+        <a class="boutonretour" href="https://yuta.alwaysdata.net/"><i class="bi bi-arrow-bar-left mb-4" style="font-size: 2rem;"></i></a>
 
     <div class="zonemess">
         <h3>Qu'est-ce qu'un cookie ?</h3>

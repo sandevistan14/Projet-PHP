@@ -2,8 +2,10 @@
 
 namespace modules\blog\models;
 
+require '/home/yuta/www/_assets/includes/autoloader.php';
 
 use DateTime;
+use _assets\includes\Database;
 
 class Post
 {
@@ -17,6 +19,7 @@ class Post
     private int $likesNumber;
     private int $commentsNumber;
     private $categories = array();
+    private bool $IsComment;
 
     public function __construct($post_data,array $categories){
         $this->IdPost = $post_data['ID_POST'];
@@ -29,7 +32,14 @@ class Post
         $this->lastEditDate = DateTime::createFromFormat( "Y-m-d H:i:s",$post_data['LAST_EDIT_DATE'],
             new \DateTimeZone('Europe/Berlin'));
         $this->likesNumber = $post_data['LIKE_NUMBER'];
+        $this->commentsNumber = $post_data['COMMENT_NUMBER'];
         $this->categories = $categories;
+        if ($post_data['PARENT_ID'] === null){
+            $this->IsComment = false;
+        } else {
+            $this->IsComment = true;
+        }
+
     }
 
     /**
@@ -201,5 +211,27 @@ class Post
     public function setCategories(array $categories): void
     {
         $this->categories = $categories;
+    }
+
+    public function isComment(): bool
+    {
+        return $this->IsComment;
+    }
+
+    public function setIsComment(bool $IsComment): void
+    {
+        $this->IsComment = $IsComment;
+    }
+
+    public function IsLike(int $Id_USER):bool {
+        $query = 'SELECT * FROM LIKE_TABLE WHERE LIKED_POST = ? AND USER_ID = ?';
+        $request = Database::getInstance()->prepare($query);
+        $request->execute([$this->IdPost, $Id_USER]);
+        if ($request->rowCount() === 0){
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 }

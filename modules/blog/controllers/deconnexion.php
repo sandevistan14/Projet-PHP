@@ -4,5 +4,5 @@ session_start();
 unset($_SESSION['currentUser']);
 
 //renvoie sur la page connexion
-header('Location: ../views/connectionPage.php');
+header('Location: https://yuta.alwaysdata.net/');
 exit();

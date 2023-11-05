@@ -1,209 +1,19 @@
 <!-- La navBar-->
 <nav class="navbar fixed-top bg-light">
     <div class="container-fluid">
-        <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuDeroulant" aria-controls="menuDeroulant">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <a  href="javascript:history.back()" type="button" class="btn" aria-label="Return">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+        </a>
         <a class="navbar-brand mx-auto" href="#">
             <img src="https://yuta.alwaysdata.net/_assets/images/Logo_Yuta_1.PNG" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
         </a>
-        <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuMessage" aria-controls="menuMessage">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
-                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12
-                6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
-            </svg>
-            <span class="badge rounded-pill badge-notification bg-danger" id="badge-notifications">9</span>
-        </button>
+        <h5 class="offcanvas-title">Commentaire</h5>
     </div>
 </nav>
 
-
-<!-- Le contenu de l'offcanvas menu -->
-<div class="offcanvas offcanvas-size-full offcanvas-start" tabindex="-1" id="menuDeroulant" aria-labelledby="menuDeroulantLabel">
-    <div class="offcanvas-header">
-        <nav class="navbar fixed-top bg-light">
-            <div class="container-fluid">
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                <a class="navbar-brand mx-auto" href="#">
-                    <img src="https://yuta.alwaysdata.net/_assets/images/Logo_Yuta_1.PNG" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                </a>
-                <h5 class="offcanvas-title" id="menuDeroulantLabel">Menu</h5>
-            </div>
-        </nav>
-    </div>
-    <div class="offcanvas-body">
-        <div class="accordion accordion-flush">
-            <div class="accordion-item">
-                <form class="row g-3" role="search">
-                    <div class="col-md-3">
-                        <label for="SearchBar">Rechercher</label>
-                        <div class="d-flex">
-                            <input class="form-control me-2 SearchBar" id="SearchBar" type="search" placeholder="..." aria-label="SearchBar">
-                            <button class="btn primary" type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#CategorieMenu" aria-expanded="false" aria-controls="CategorieMenu">
-                        Categories
-                    </button>
-                </h2>
-                <div id="CategorieMenu" class="accordion-collapse collapse">
-                    <div class="accordion-body">
-                        <div class="row mb-3">
-                            <div class="d-flex">
-                                <input class="SearchBar form-control me-2" id="SearchBarCat" type="search" placeholder="Categorie" aria-label="SearchBarCat">
-                                <button class="btn primary" type="submit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        {% if user.isAdmin == true %}
-                        <div class="row mb-3">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCategory">
-                                Créer une nouvelle Catégorie
-                            </button>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <a href="../../../modules/blog/views/profilPage.php?id_user_profil={{ user.getId() }}" class="btn w-100">
-                        <div class="container-fluid d-flex justify-content-between align-items-center">
-                            <div class="d-inline">
-                                <label for="ParamIcon">Profil</label>
-                            </div>
-                            <div class="d-inline">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                                </svg>
-                            </div>
-                        </div>
-                    </a>
-                </h2>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <a href="/modules/blog/views/settings.php" class="btn w-100">
-                        <div class="container-fluid d-flex justify-content-between align-items-center">
-                            <div class="d-inline">
-                                <label for="ParamIcon">Paramètres</label>
-                            </div>
-                            <div class="d-inline">
-                                <svg id="ParamIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sliders" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"/>
-                                </svg>
-                            </div>
-                        </div>
-                    </a>
-                </h2>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <a class="btn w-100" data-bs-toggle="modal" data-bs-target="#ModalDéco">
-                        <div class="container-fluid d-flex justify-content-between align-items-center">
-                            <div class="d-inline">
-                                <label for="DecoIcon">Se déconnecter</label>
-                            </div>
-                            <div class="d-inline">
-                                <svg id="DecoIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-                                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                                </svg>
-                            </div>
-                        </div>
-                    </a>
-                </h2>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Le contenu de l'offcanvas message -->
-<div class="offcanvas offcanvas-size-full offcanvas-end" tabindex="-1" id="menuMessage" aria-labelledby="menuMessageLabel">
-    <div class="offcanvas-header">
-        <nav class="navbar fixed-top bg-light">
-            <div class="container-fluid">
-                <h5 class="offcanvas-title" id="menuDeroulantLabel">Messages</h5>
-                <a class="navbar-brand mx-auto" href="#">
-                    <img src="https://yuta.alwaysdata.net/_assets/images/Logo_Yuta_1.PNG" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                </a>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-        </nav>
-    </div>
-    <div class="offcanvas-body">
-        <!-- Mettez ici le contenu de votre offcanvas -->
-    </div>
-</div>
-{% if user.isAdmin == true %}
-<!--Modal Formulaire créer catégorie -->
-<div class="modal fade" id="createCategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">Nouvelle Catégorie</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="../../../modules/blog/controllers/createCategory.php">
-
-                    <label for="InputName" style="font-weight: bold" class="form-label">Nom</label><br>
-                    <input type="text" class="form-control" id="InputName" name="InputName" required><br><br>
-                    <label for="InputDesc" style="font-weight: bold;" class="form-label">Description</label><br>
-                    <textarea class="form-control" id="InputDesc" name="InputDesc" style="height: 200px;"
-                              required></textarea><br><br>
-                    <div class="modal-footer">
-                        <input type="reset" class="btn btn-secondary" data-bs-dismiss="modal" value="Fermer">
-                        <input type="submit" class="btn btn-primary" value="Créer">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-{% endif %}
-
-
-<!-- Modal déconnexion-->
-<div class="modal fade" id="ModalDéco" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="DecoTitle" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="DecoTitle">Déconnexion</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Voulez vous vraiment vous déconnecter ?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-                <a type="button" class="btn btn-danger" href="../../../modules/blog/controllers/deconnexion.php">Se déconnecter</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <div class="MainContent">
-
-    <!-- Flèche de retour -->
-    <a href="../../../modules/blog/views/homePage.php" class="back-arrow">
-        <span class="arrow-left">←</span>
-    </a>
 
     <div class="card-header">
         <div class="row justify-item-start">
@@ -244,15 +54,22 @@ post dorigine
                     {% set Categorie = Categorie ~ cat.CATEGORY_NAME ~ ', ' %}
             {% endfor %}
 
-            Dans <strong>{{ Categorie|trim(', ') }}</strong>
+            <div class="categorie"> Dans <strong>{{ Categorie|trim(', ') }}</strong></div>
         </div>
     </div>
     <div class="card-footer d-flex justify-content-between">
-        <button class="btn" id="like">
+        <a class="btn text-body-secondary link" id="like{{ post.getIdPost() }}" href="../../../modules/blog/controllers/LikeManagement.php?ID_POST= {{ post.getIdPost() }}">
+            {% if post.IsLike(currentUser.getId()) %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#8E48FF" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+            </svg>
+            {% else %}
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
                 <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
             </svg>
-        </button>
+            {% endif %}
+            <span class="likes-number">{{ post.getLikesNumber() }}</span>
+        </a>
 
         <!-- Btn modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createComment">
@@ -275,7 +92,7 @@ post dorigine
                         <form action="../../../modules/blog/controllers/createComment.php" method="post" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="inputImg" class="form-label">Inserer une image</label>
-                                <input type="file" class="form-control" id="inputImg" name="inputImg" accept="image/*">
+                                <input type="file" class="form-control" id="inputImg" name="inputImg" accept="image/png, image/jpeg">
                             </div>
                             <div class="mb-3">
                                 <label for="inputMsg" class="form-label">Entrez votre message</label>

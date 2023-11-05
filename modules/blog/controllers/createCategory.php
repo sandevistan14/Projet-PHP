@@ -16,10 +16,10 @@ settype($descCat, "string");
 
 //Envoie de la catégorie sur la BD
 if($_SESSION['currentUser']->createCategory($nameCat,$descCat)){
-    header('Location: ../views/homePage.php?categoryCreated=1');
+    header('Location: https://yuta.alwaysdata.net/?categoryCreated=1');
     exit();
 }
 else {
-    header('Location: ../views/homePage.php?categoryCreated=0');
+    header('Location: https://yuta.alwaysdata.net/?categoryCreated=0');
     exit();
 }

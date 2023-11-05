@@ -7,12 +7,7 @@
         <a class="navbar-brand mx-auto" href="#">
             <img src="https://yuta.alwaysdata.net/_assets/images/Logo_Yuta_1.PNG" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
         </a>
-        <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuMessage" aria-controls="menuMessage">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
-                <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-            </svg>
-        </button>
+        <h5 class="offcanvas-title">Home</h5>
     </div>
 </nav>
 
@@ -36,17 +31,18 @@
     <div class="offcanvas-body">
         <div class="accordion accordion-flush">
             <div class="accordion-item">
-                <form class="row g-3" role="search">
+                <form class="row g-3" method="post" action="../../../modules/blog/views/SearchPage.php">
                     <div class="col-md-3">
                         <label for="SearchBar">Rechercher</label>
-                        <div class="d-flex">
-                            <input class="form-control me-2 SearchBar" id="SearchBar" type="search" placeholder="..." aria-label="SearchBar">
-                            <button class="btn primary" type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                </svg>
-                            </button>
-                        </div>
+                            <div class="d-flex">
+                                <input class="form-control me-2 SearchBar" id="SearchBar" name="SearchBar" type="search" placeholder="..." aria-label="SearchBar">
+                                <label class="btn primary" style="padding-top: 3%;">
+                                    <input class="visually-hidden" type="submit">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                        </svg>
+                                </label>
+                            </div>
                     </div>
                 </form>
             </div>
@@ -58,20 +54,36 @@
                 </h2>
                 <div id="CategorieMenu" class="accordion-collapse collapse">
                     <div class="accordion-body">
-                        <div class="row mb-3">
-                            <div class="d-flex">
-                                <input class="SearchBar form-control me-2" id="SearchBarCat" type="search" placeholder="Categorie" aria-label="SearchBarCat">
-                                <button class="btn primary" type="submit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                    </svg>
-                                </button>
-                            </div>
+                        <div class="row mb-3 justify-content-around">
+                            <form method="post" action="../../../modules/blog/views/SearchCat.php" class="d-flex">
+                                <div id="SearchSelectDiv" class="form-floating col-4">
+                                    <select class="form-select form-control" id="CategorieSearch" name="CategorieSearch">
+                                        <option value="0" selected>-</option>
+                                        {% for cat in categories %}
+                                        <option value="{{ cat.getIdCat() }}">{{ cat.getLibelle() }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <label for="CategorieSearch">Catégorie</label>
+                                </div>
+                                <div id="SearchBtnDiv" class="col-4">
+                                    <label id="BtnSearchCat" class="btn primary">
+                                        <input class="visually-hidden" type="submit" name="SubmitSearchCat">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                            </svg>
+                                    </label>
+                                </div>
+                            </form>
                         </div>
-                        {% if user.isAdmin == true %}
+                        {% if currentUser.isAdmin == true %}
                             <div class="row mb-3">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCategory">
                                     Créer une nouvelle Catégorie
+                                </button>
+                            </div>
+                            <div class="row mb-3">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModifCategory">
+                                    Modifier une catégorie
                                 </button>
                             </div>
                         {% endif %}
@@ -80,7 +92,7 @@
             </div>
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <a href="../../../modules/blog/views/profilPage.php?id_user_profil={{ user.getId() }}" class="btn w-100">
+                    <a href="https://yuta.alwaysdata.net/?id_user_profil={{ currentUser.getId() }}" class="btn w-100">
                         <span class="container-fluid d-flex justify-content-between align-items-center">
                             <span class="d-inline">
                                 Profil
@@ -130,24 +142,7 @@
     </div>
 </div>
 
-<!-- Le contenu de l'offcanvas message -->
-<div class="offcanvas offcanvas-size-full offcanvas-end" tabindex="-1" id="menuMessage">
-    <div class="offcanvas-header">
-        <nav class="navbar fixed-top bg-light">
-            <div class="container-fluid">
-                <h5 class="offcanvas-title">Messages</h5>
-                <a class="navbar-brand mx-auto" href="#">
-                    <img src="https://yuta.alwaysdata.net/_assets/images/Logo_Yuta_1.PNG" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                </a>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-        </nav>
-    </div>
-    <div class="offcanvas-body">
-        <!-- Mettez ici le contenu de votre offcanvas -->
-    </div>
-</div>
-{% if user.isAdmin == true %}
+{% if currentUser.isAdmin == true %}
     <!--Modal Formulaire créer catégorie -->
     <div class="modal fade" id="createCategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-hidden="true">
@@ -159,15 +154,56 @@
                 </div>
                 <div class="modal-body">
                     <form method="post" action="../../../modules/blog/controllers/createCategory.php">
-
-                        <label for="InputName" style="font-weight: bold" class="form-label">Nom</label><br>
-                        <input type="text" class="form-control" id="InputName" name="InputName" required><br><br>
-                        <label for="InputDesc" style="font-weight: bold;" class="form-label">Description</label><br>
-                        <textarea class="form-control" id="InputDesc" name="InputDesc" style="height: 200px;"
-                                  required></textarea><br><br>
+                        <div class="mb-3">
+                            <label for="InputName" style="font-weight: bold" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="InputName" name="InputName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="InputDesc" style="font-weight: bold;" class="form-label">Description</label>
+                            <textarea class="form-control" id="InputDesc" name="InputDesc" style="height: 200px;"required></textarea>
+                        </div>
                         <div class="modal-footer">
                             <input type="reset" class="btn btn-secondary" data-bs-dismiss="modal" value="Fermer">
                             <input type="submit" class="btn btn-primary" value="Créer">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal Formulaire Modifier catégorie -->
+    <div class="modal fade" id="ModifCategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Modifier une Catégorie</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="../../../modules/blog/controllers/ModifyCat.php">
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <select class="form-select form-control" id="SelectCategorieModif" name="SelectCategorieModif">
+                                    <option value="0" selected>-</option>
+                                    {% for cat in categories %}
+                                    <option value="{{ cat.getIdCat() }}">{{ cat.getLibelle() }}</option>
+                                    {% endfor %}
+                                </select>
+                                <label for="SelectCategorieModif">Catégorie</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="InputModifName" style="font-weight: bold" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="InputModifName" name="InputModifName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="InputModifDesc" style="font-weight: bold;" class="form-label">Description</label>
+                            <textarea class="form-control" id="InputModifDesc" name="InputModifDesc" style="height: 200px;"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="reset" class="btn btn-secondary" data-bs-dismiss="modal" value="Annuler">
+                            <input type="submit" class="btn btn-primary" value="Enregistrer">
                         </div>
                     </form>
                 </div>
@@ -199,7 +235,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="inputImg" class="form-label">Inserer une image</label>
-                        <input type="file" class="form-control" id="inputImg" name="inputImg" accept="image/*">
+                        <input type="file" class="form-control" id="inputImg" name="inputImg" accept="image/png, image/jpeg">
                     </div>
                     <div class="mb-3">
                         <label for="inputMsg" class="form-label">Entrez votre message</label>

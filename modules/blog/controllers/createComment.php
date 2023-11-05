@@ -25,7 +25,7 @@ settype($message, "string");
 
 //Recup image, upload sur imgur
 if(is_uploaded_file($_FILES ['inputImg'] ['tmp_name'])){
-    $upload_data = imageUploader::uploadPicture($_FILES ['inputImg']);
+    $upload_data = imageUploader::uploadPicture($_FILES ['inputImg']['tmp_name'],$_FILES['inputImg']['size']);
     if($upload_data)
         $imgLink = $upload_data->data->link;
 } else {
@@ -49,7 +49,7 @@ $request->execute([$userId,$parentId,null,$message,$imgLink]);
 
 
 //renvoie sur l'index
-header('Location: ../../../modules/blog/views/postFocus.php?id_Post=' . $parentId);
+header('Location: https://yuta.alwaysdata.net/?id_Post=' . $parentId);
 
 exit();
 ?>

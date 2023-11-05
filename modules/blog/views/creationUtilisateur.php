@@ -16,7 +16,7 @@ ob_start();
             <h1 class="text-center" id="titre">Mot de passe oublié</h1>
             <form class="needs-validation" novalidate>
                 <div class="mb-4 col-8 mx-auto">
-                    <input type="text" placeholder="Nom d'utilisateur" class="form-control form-control-lg shadow-sm" id="nom" name="nom" required>
+                    <input type="mail" placeholder="Adresse mail" class="form-control form-control-lg shadow-sm" id="mail" name="mail" required>
                     <div class="invalid-feedback">
                         Veuillez choisir un nom d'utilisateur
                     </div>

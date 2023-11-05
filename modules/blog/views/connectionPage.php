@@ -4,15 +4,23 @@ namespace modules\blog\views;
 
 require '/home/yuta/www/_assets/includes/autoloader.php';
 
-session_start();
-
 class ConnectionPage
 {
+    private bool $connection_error = false;
+
+    /**
+     * @param bool $connection_error
+     */
+    public function __construct(bool $connection_error)
+    {
+        $this->connection_error = $connection_error;
+    }
+
     public function show(): void {
-        if(isset($_SESSION["currentUser"])) {
-            header('Location: ../views/homePage.php');
-            exit();
-        }
+//        if(isset($_SESSION["currentUser"])) {
+//            header('Location: ../views/homePage.php');
+//            exit();
+//        }
         ob_start();
 
 ?>
@@ -33,7 +41,7 @@ class ConnectionPage
                         <img alt="Logo Yuta" src="/favicon.ico" class="rounded mx-auto d-block" id="yutaImg">
                     </div>
                 </div>
-                <form class="needs-validation" method="post" action="../controllers/auth.php" novalidate>
+                <form class="needs-validation" method="post" action="modules/blog/controllers/auth.php" novalidate>
                         <div class="mb-4 col-8 mx-auto">
                             <input type="text" placeholder="Email ou Nom d'utilisateur" class="form-control form-control-lg shadow-sm" id="ident" name="ident" required>
                             <div class="invalid-feedback">
@@ -51,12 +59,12 @@ class ConnectionPage
                                 </div>
                             </div>
                         </div>
-                        <?php
-                        if (isset($_GET['connection_error'])) {
-                            $error_message = '// MESSAGE D\'ERREUR A AJOUTER ICI SOUS FORME DE DIV //';
-                            echo $error_message;
-                        }
-                        ?>
+                    <?php
+                    if ($this->connection_error) {
+                        $error_message = '<div class="alert alert-danger" role="alert">Les informations transmises n\'ont pas permis de vous authentifier.</div>';
+                        echo $error_message;
+                    }
+                    ?>
                         <div class="mb-4 col-8 mx-auto">
                             <a href="/modules/blog/views/forgotPassword.php"><p class="text-end">Mot de passe oublié ?</p></a>
                         </div>
@@ -64,7 +72,7 @@ class ConnectionPage
                             <button type="submit" class="btn btn-primary btn-lg" id="submitButton">Se connecter</button>
                         </div>
                     </form>
-                    <p class="mt-3 text-center">Pas encore de compte ? <a href="/modules/blog/views/inscriptionPage.php">S'inscrire</a></p>
+                    <p class="mt-3 text-center">Pas encore de compte ? <a href="https://yuta.alwaysdata.net/?needs_inscription=1">S'inscrire</a></p>
                 </div>
             </div>
 
@@ -104,7 +112,7 @@ class ConnectionPage
         </script>
 
         <?php
-            if (!isset($_COOKIE["WantCookies"])) {
+            /*if (!isset($_COOKIE["WantCookies"])) {
         echo "
         <!-- Modal -->
         <div class=\"modal fade\" id=\"myModal\" data-bs-backdrop=\"static\" data-bs-keyboard=\"false\" tabindex=\"-1\" aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">
@@ -125,10 +133,9 @@ class ConnectionPage
                 </div>
             </div>
         </div>";
-            }
+            }*/
 
         $content = ob_get_clean();
         (new layout('Yuta', $content))->show();
     }
 }
-(new ConnectionPage())->show();

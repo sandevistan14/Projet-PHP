@@ -9,7 +9,8 @@ class imageUploader
     private const MAX_SIZE_LIMIT = 99999999;
 
     /**
-     * @param $file_info
+     * @param $tmp_name
+     * @param $size
      * @return false|mixed
      */
     public static function uploadPicture($tmp_name,$size){

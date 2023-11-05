@@ -1,51 +1,50 @@
-<div class="d-flex flex-column  text-bg-dark" id="navbar-settings">
+<div class="offcanvas offcanvas-size-full offcanvas-start" tabindex="-1" id="menuDeroulant">
+    <!-- ... Votre contenu ici ... -->
+</div>
+
+<div class="d-flex flex-column text-bg-dark" id="navbar-settings">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-        <img src="https://yuta.alwaysdata.net/_assets/images/Logo_Yuta_1_removebg.PNG" alt="Logo" width="70" height="70">
+        <img src="https://yuta.alwaysdata.net/_assets/images/Logo_Yuta_1_removebg.PNG" alt="Logo" width="70" height="70" class="rounded-circle me-2">
         <span id="title-settings">Yuta</span>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
-                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-                Home
+            <a class="nav-link text-white category-link" data-target="myAccount">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill me-2" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                </svg>
+                Mon compte
             </a>
         </li>
-        <li>
-            <a href="#" class="nav-link text-white">
-                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                Dashboard
+        <li class="nav-item">
+            <a class="nav-link text-white category-link" data-target="accessibility">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-universal-access-circle me-2" viewBox="0 0 16 16">
+                    <path d="M8 4.143A1.071 1.071 0 1 0 8 2a1.071 1.071 0 0 0 0 2.143Zm-4.668 1.47 3.24.316v2.5l-.323 4.585A.383.383 0 0 0 7 13.14l.826-4.017c.045-.18.301-.18.346 0L9 13.139a.383.383 0 0 0 .752-.125L9.43 8.43v-2.5l3.239-.316a.38.38 0 0 0-.047-.756H3.379a.38.38 0 0 0-.047.756Z"/>
+                    <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0ZM1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8Z"/>
+                </svg>
+                Accessibilité
             </a>
         </li>
-        <li>
-            <a href="#" class="nav-link text-white">
-                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                Orders
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link text-white">
-                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                Products
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link text-white">
-                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                Customers
+        <li class="nav-item">
+            <a class="nav-link text-white category-link" data-target="deleteAccount">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash me-2" viewBox="0 0 16 16">
+                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                </svg>
+                Supprimer compte
             </a>
         </li>
     </ul>
     <hr>
     <div class="dropdown">
-        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <div class="profile-picture-container">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2 position-relative">
-                <div class="status-circle">
-                </div>
-                </div>
-            <strong>chong</strong>
-            <span class="status-badge online"></span> <!-- Ajoutez la classe correspondant au statut ici -->
+                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2 position-relative">
+                <div class="status-circle"></div>
+            </div>
+            <strong class="fs-5">test</strong>
+            <span class="status-badge online"></span>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
             <li><a class="dropdown-item" href="#" id="onlineStatus">En ligne</a></li>
@@ -53,32 +52,86 @@
             <li><a class="dropdown-item" href="#" id="inactiveStatus">Inactif</a></li>
             <li><a class="dropdown-item" href="#" id="dndStatus">Ne pas déranger</a></li>
             <li><a class="dropdown-item" href="#" id="invisibleStatus">Invisible</a></li>
-
         </ul>
     </div>
-
 </div>
+<!--<div class="d-flex flex-column text-bg-dark" id="navbar-settings">-->
+<!--    <button class="btn btn-primary d-md-none" id="toggleOffcanvas">-->
+<!--        <img src="https://yuta.alwaysdata.net/_assets/images/Logo_Yuta_1_removebg.PNG" alt="Logo" width="70" height="70" class="rounded-circle me-2">-->
+<!--    </button>-->
+<!--    <div id="offcanvasContent">-->
+<!--        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">-->
+<!--            <img src="https://yuta.alwaysdata.net/_assets/images/Logo_Yuta_1_removebg.PNG" alt="Logo" width="70" height="70" class="rounded-circle me-2">-->
+<!--            <span id="title-settings">Yuta</span>-->
+<!--        </a>-->
+<!--    <hr>-->
+<!--    <ul class="nav nav-pills flex-column mb-auto d-md-block d-none">-->
+<!--        <li class="nav-item">-->
+<!--            <a href="#" class="nav-link text-white category-link" data-target="monCompte">-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill me-2" viewBox="0 0 16 16">-->
+<!--                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>-->
+<!--                </svg>-->
+<!--                Mon compte-->
+<!--            </a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--            <a href="#" class="nav-link text-white category-link" data-target="notifications">-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell-fill me-2" viewBox="0 0 16 16">-->
+<!--                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>-->
+<!--                </svg>-->
+<!--                Notifications-->
+<!--            </a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--            <a href="#" class="nav-link text-white">-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-universal-access-circle me-2" viewBox="0 0 16 16">-->
+<!--                    <path d="M8 4.143A1.071 1.071 0 1 0 8 2a1.071 1.071 0 0 0 0 2.143Zm-4.668 1.47 3.24.316v2.5l-.323 4.585A.383.383 0 0 0 7 13.14l.826-4.017c.045-.18.301-.18.346 0L9 13.139a.383.383 0 0 0 .752-.125L9.43 8.43v-2.5l3.239-.316a.38.38 0 0 0-.047-.756H3.379a.38.38 0 0 0-.047.756Z"/>-->
+<!--                    <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0ZM1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8Z"/>-->
+<!--                </svg>-->
+<!--                Accessibilité-->
+<!--            </a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--            <a href="#" class="nav-link text-white">-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash me-2" viewBox="0 0 16 16">-->
+<!--                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>-->
+<!--                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>-->
+<!--                </svg>-->
+<!--                Supprimer compte-->
+<!--            </a>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--    <hr>-->
+<!--    <div class="dropdown d-md-block d-none">-->
+<!--        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--            <div class="profile-picture-container">-->
+<!--                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2 position-relative">-->
+<!--                <div class="status-circle"></div>-->
+<!--            </div>-->
+<!--            <strong class="fs-5">chong</strong>-->
+<!--            <span class="status-badge online"></span>-->
+<!--        </a>-->
+<!--        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">-->
+<!--            <li><a class="dropdown-item" href="#" id="onlineStatus">En ligne</a></li>-->
+<!--            <li><hr class="dropdown-divider"></li>-->
+<!--            <li><a class="dropdown-item" href="#" id="inactiveStatus">Inactif</a></li>-->
+<!--            <li><a class="dropdown-item" href="#" id="dndStatus">Ne pas déranger</a></li>-->
+<!--            <li><a class="dropdown-item" href="#" id="invisibleStatus">Invisible</a></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<script>-->
+<!--    $(document).ready(function() {-->
+<!--        $('#logo-link').click(function() {-->
+<!--            if ($(window).width() < 576) {-->
+<!--                $('#navbar-settings').toggleClass('offcanvas-open');-->
+<!--            }-->
+<!--        });-->
 
-<script>
-    const statusCircle = document.querySelector('.status-circle');
-    const onlineStatus = document.getElementById('onlineStatus');
-    const inactiveStatus = document.getElementById('inactiveStatus');
-    const dndStatus = document.getElementById('dndStatus');
-    const invisibleStatus = document.getElementById('invisibleStatus');
+<!--        $('.category-link').click(function() {-->
+<!--            $('#navbar-settings').removeClass('offcanvas-open');-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
 
-    onlineStatus.addEventListener('click', () => {
-        statusCircle.style.backgroundColor = 'green';
-    });
-
-    inactiveStatus.addEventListener('click', () => {
-        statusCircle.style.backgroundColor = 'yellow';
-    });
-
-    dndStatus.addEventListener('click', () => {
-        statusCircle.style.backgroundColor = 'red';
-    });
-
-    invisibleStatus.addEventListener('click', () => {
-        statusCircle.style.backgroundColor = 'grey';
-    });
-</script>

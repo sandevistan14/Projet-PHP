@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-header">
+        <div class="d-flex align-items-top">
+            <div class="d-flex" id="img-Profil">
+                <a class="link" href="https://yuta.alwaysdata.net/?id_user_profil={{ user.getId() }}">
+                    <img src="{{ user.getProfilePicture() }}" alt="" width="70" height="70" class="post-pfp d-inline-block align-text-top img-flex rounded">
+                </a>
+            </div>
+            <div class="col">
+                <div class="d-flex">
+                    <a class="link" href="https://yuta.alwaysdata.net/?id_user_profil={{ user.getId() }}">
+                        <h2 class="Username-profil-card Username fw-bold">{{ user.getUsername() }}</h2>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

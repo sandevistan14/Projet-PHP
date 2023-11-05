@@ -1,0 +1,42 @@
+<nav class="navbar fixed-top bg-body-tertiary">
+    <div class="container-fluid justify-content-start">
+            <a href="https://yuta.alwaysdata.net/" type="button" class="btn" aria-label="Return">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+            </a>
+        <form method="post" action="../../../modules/blog/views/SearchCat.php" class="d-flex">
+            <div class="form-floating col">
+                <select class="form-select form-control" id="CategorieSearch" name="CategorieSearch">
+                    {% for cat in categories %}
+                        {% if cat.getIdCat() == CategoryUsed.getIdCat() %}
+                            <option value="{{ cat.getIdCat() }}" selected>{{ cat.getLibelle() }}</option>
+                        {% else %}
+                            <option value="{{ cat.getIdCat() }}">{{ cat.getLibelle() }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <label for="CategorieSearch">Catégorie</label>
+            </div>
+            <div id="SearchCat_DivBtn" class="col-4">
+                <label id="SearchCat_labelBtn" class="btn primary">
+                    <input class="visually-hidden" type="submit" name="SubmitSearchCat">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </label>
+            </div>
+        </form>
+    </div>
+</nav>
+<div class="MainContent" id="MainSearch">
+    {% if CategoryIDUsed > 0 %}
+        {% if posts|length == 0 %}
+            <h5 class="fw-bold text-center"> Il n'y a rien pour le moment</h5>
+        {% else %}
+            {{ include('ListPost.html') }}
+        {% endif %}
+    {% else %}
+        <h5 class="fw-bold text-center"> Veullez choisir une catégorie</h5>
+    {% endif %}
+</div>

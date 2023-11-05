@@ -6,6 +6,16 @@ require '/home/yuta/www/_assets/includes/autoloader.php';
 
 class InscriptionPage
 {
+    private bool $inscription_error = false;
+
+    /**
+     * @param bool $inscription_error
+     */
+    public function __construct(bool $inscription_error)
+    {
+        $this->inscription_error = $inscription_error;
+    }
+
     public function show(): void {
         ob_start();
         ?>
@@ -17,7 +27,7 @@ class InscriptionPage
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <h1 class="text-center" id="titre">S'inscrire</h1>
-                    <form action="../controllers/inscription.php" class="needs-validation" novalidate method="post">
+                    <form action="modules/blog/controllers/inscription.php" class="needs-validation" novalidate method="post">
                         <div class="mb-4 col-8 mx-auto">
                             <input type="text" placeholder="Nom" class="form-control form-control-lg shadow-sm" id="username"
                                    name="username" required>
@@ -58,7 +68,7 @@ class InscriptionPage
                             <input type="submit" class="btn btn-primary btn-lg" id="submitButton" value="Continuer">
                         </div>
                     </form>
-                    <p class="mt-3 text-center">Déjà un compte ? <a href="/modules/blog/views/connectionPage.php">Se connecter</a></p>
+                    <p class="mt-3 text-center">Déjà un compte ? <a href="https://yuta.alwaysdata.net/">Se connecter</a></p>
                 </div>
             </div>
         </div>
@@ -184,4 +194,3 @@ class InscriptionPage
         (new layout('Yuta', $content))->show();
     }
 }
-(new InscriptionPage())->show();

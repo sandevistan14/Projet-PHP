@@ -160,6 +160,10 @@ img.post{
     position: relative;
     top: 50px;
 }
+#MainSearch{
+    position: relative;
+    top: 66px;
+}
 .ListPost div.Post:nth-child(5) ~ div.Post{
     display: none;
 }
@@ -208,13 +212,35 @@ img.post{
     color: inherit;
     text-decoration: none;
 }
-/* Bouton LoadMore */
+#SearchSelectDiv{
+    width: 85%;
+}
+#SearchBtnDiv{
+    padding-left: 3%;
+}
+#BtnSearchCat{
+    padding: 17%;
+}
+#SearchCat_selectDiv{
+    width: 190%;
+}
+#SearchCat_DivBtn{
+    padding-left: 5%;
+    padding-top: 1.5%;
+}
+#SearchCat_labelBtn{
+    padding-top: 30%;
+    padding-bottom: 36%;
+}/* Bouton LoadMore */
 .btn-load{
     background-color: white;
     color: #7623FD;
     border-top: solid 1px darkgrey;
     border-bottom: solid 1px darkgrey;
     border-radius: 0;
+}
+.text-center{
+    padding-top: 9%;
 }
 /* Default styles for the sidebar */
 #navbar-settings {
@@ -227,6 +253,12 @@ img.post{
     z-index: 1;
     padding: 20px;
     transition: all 0.3s; /* Add a smooth transition effect */
+    text-align: center;
+}
+.nav-link {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    cursor: pointer;
 }
 
 /* Media query for smaller screens (adjust as needed) */
@@ -234,22 +266,32 @@ img.post{
     #navbar-settings {
         width: 100%;
         padding: 20px;
-    }
-    /* Centrer les éléments et augmenter la taille sur les écrans de 576px */
-    #navbar-settings a {
-        text-align: center;
-        font-size: 1.5rem;
-        margin-bottom: 20px;
+        /*transform: translateX(-100%);*/
+        /*transition: transform 0.3s ease;*/
     }
     /* Style pour le titre Yuta*/
     #navbar-settings #title-settings {
-        text-align: center; /* Centrer le texte */
-        font-size: 2rem; /* Augmenter la taille du texte */
+        font-size: 3rem; /* Augmenter la taille du texte */
     }
+    /*.offcanvas-open #navbar-settings {*/
+    /*    transform: translateX(0);*/
+    /*}*/
+    /*#toggleOffcanvas {*/
+    /*    display: block;*/
+    /*}*/
+
+    /*#toggleOffcanvas img {*/
+    /*    cursor: pointer;*/
+    /*}*/
+
 }
 @media (min-width: 577px) and (max-width: 768px) {
     #navbar-settings {
-        width: 200px; /* Set the width to 200px */
+        width: 235px; /* Set the width to 200px */
+        padding: 20px;
+    }
+    #navbar-settings a {
+        margin-bottom: 20px;
     }
 }
 
@@ -289,6 +331,15 @@ img.post{
 #buttonCookies {
     text-align: left;
 }
+.link-tab{
+    font-size: 1rem;
+}
+#deletePostIconContainer {
+    position: absolute;
+    top: 10px; /* Ajustez cette valeur en fonction de votre préférence de positionnement verticale */
+    right: 10px; /* Ajustez cette valeur en fonction de votre préférence de positionnement horizontale */
+}
+
 
 
 
